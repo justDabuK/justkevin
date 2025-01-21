@@ -14,7 +14,7 @@ I asked myself "Wouldn't it be nice to build myself a camera". As although I am 
 
 Fast-forward, I learned that the new raspberry Pi 5 hast a slimmer camera port, which means I couldn't use it until I ordered an appropriate cable. 
 
-_Insert picture of non matching cable_
+![non-matching-camera-cable.jpg](@assets/pokedexpi/non-matching-camera-cable.jpg)
 
 I therefore now am equipped with a Raspberry Pi ~~5~~ 4, a HyperPixel 4" square touch display, a Raspberry Pi Camera module 3 and still big dreams. Including buying said cable, someday. 
 
@@ -47,7 +47,8 @@ Big thanks to this [GitHub thread](https://github.com/pimoroni/hyperpixel4/issue
 
 I want to finish this up with a picture of how it looks right now (using a QT interface from the camera module documentation)
 
-_insert picture_
+![qt-app tryout setup](@assets/pokedexpi/qt-app-tryout-setup.jpg)
+![qt-app screenshot](@assets/pokedexpi/qt-app-screenshot.png)
 
 As next steps I want to write a website that lets one access the camera stream and take pictures. 
 
