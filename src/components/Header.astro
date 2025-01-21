@@ -1,9 +1,12 @@
 ---
 import ThemeSelection from "./ThemeSelection/ThemeSelection.astro";
+import { Icon } from 'astro-icon/components';
 ---
 <div>
     <nav>
-        <a href="/">home</a>
+        <a href="/">
+            <Icon name="kevin_single_logo_large"/>
+        </a>
         <ul>
             <li><a href="/blog">blog</a></li>
         </ul>
@@ -16,7 +19,7 @@ import ThemeSelection from "./ThemeSelection/ThemeSelection.astro";
     div {
         display: flex;
         gap: var(--size-8);
-        align-items: baseline;
+        align-items: center;
         justify-content: space-between;
 
 
@@ -24,7 +27,12 @@ import ThemeSelection from "./ThemeSelection/ThemeSelection.astro";
             flex: 1;
             display: flex;
             justify-content: space-between;
-            align-items: baseline;
+            align-items: center;
+
+            [data-icon] {
+                font-size: var(--size-96);
+                color: CanvasText;
+            }
 
             ul {
                 list-style: none;
