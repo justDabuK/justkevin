@@ -1,0 +1,17 @@
+<div>
+    <label for="theme-select">Theme:</label>
+    <select name="theme" id="theme-select">
+        <option value="light dark">system</option>
+        <option value="light">light</option>
+        <option value="dark">dark</option>
+    </select>
+</div>
+
+<style>
+    div {
+        border-left: 2px solid color-mix(in oklch, CanvasText 30%, transparent);
+        padding-left: var(--size-8);
+    }
+</style>
+
+<script src="./themeSelection.ts" />

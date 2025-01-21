@@ -1,20 +1,36 @@
-<nav>
-    <a href="/">home</a>
-    <ul>
-        <li><a href="/blog">blog</a></li>
-    </ul>
-</nav>
+---
+import ThemeSelection from "./ThemeSelection/ThemeSelection.astro";
+---
+<div>
+    <nav>
+        <a href="/">home</a>
+        <ul>
+            <li><a href="/blog">blog</a></li>
+        </ul>
+    </nav>
+    <ThemeSelection />
+</div>
+
 
 <style>
-    nav {
+    div {
         display: flex;
-        justify-content: space-between;
+        gap: var(--size-8);
         align-items: baseline;
+        justify-content: space-between;
 
-        ul {
-            list-style: none;
+
+        nav {
+            flex: 1;
             display: flex;
-            gap: var(--size-8)
+            justify-content: space-between;
+            align-items: baseline;
+
+            ul {
+                list-style: none;
+                display: flex;
+                gap: var(--size-8)
+            }
         }
     }
 </style>
