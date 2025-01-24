@@ -12,6 +12,7 @@ import { Icon } from 'astro-icon/components';
         </ul>
     </nav>
     <ThemeSelection />
+    <a href="/rss.xml"><Icon name="rss" /></a>
 </div>
 
 
@@ -39,6 +40,11 @@ import { Icon } from 'astro-icon/components';
                 display: flex;
                 gap: var(--size-8)
             }
+        }
+
+        [data-icon="rss"] {
+            font-size: var(--font-size-24);
+            color: CanvasText;
         }
     }
 </style>
