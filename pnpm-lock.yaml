@@ -11,6 +11,9 @@ importers:
       '@astrojs/rss':
         specifier: ^4.0.11
         version: 4.0.11
+      '@fontsource/inclusive-sans':
+        specifier: ^5.1.1
+        version: 5.1.1
       astro:
         specifier: ^5.1.8
         version: 5.1.8(@types/node@22.10.7)(rollup@4.31.0)(typescript@5.7.2)
@@ -218,6 +221,9 @@ packages:
     engines: {node: '>=18'}
     cpu: [x64]
     os: [win32]
+
+  '@fontsource/inclusive-sans@5.1.1':
+    resolution: {integrity: sha512-1uJT1lIjMZanMkzdXPgmEDaVoLFNLW01MK3NF/PV6NkmyMv0lyFpQ816Y5S3xvBl09M8XK7ZtH5hlRxzeEqblw==}
 
   '@iconify/tools@4.1.1':
     resolution: {integrity: sha512-Hybu/HGhv6T8nLQhiG9rKx+ekF7NNpPOEQAy7JRSKht3s3dcFSsPccYzk24Znc9MTxrR6Gak3cg6CPP5dyvS2Q==}
@@ -1920,6 +1926,8 @@ snapshots:
 
   '@esbuild/win32-x64@0.24.2':
     optional: true
+
+  '@fontsource/inclusive-sans@5.1.1': {}
 
   '@iconify/tools@4.1.1':
     dependencies:
