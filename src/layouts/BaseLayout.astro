@@ -1,6 +1,7 @@
 ---
 import Header from "../components/Header.astro";
 import '@fontsource/inclusive-sans';
+import '@fontsource/pacifico';
 
 interface Props {
 	title: string;
@@ -92,5 +93,11 @@ const { title } = Astro.props;
 		max-width: 100%;
 		height: auto;
 		object-fit: contain;
+	}
+
+	h1 {
+		font-family: "Pacifico", cursive;
+		font-size: var(--font-size-48);
+		font-weight: 400;
 	}
 </style>
