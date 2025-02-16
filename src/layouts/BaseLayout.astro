@@ -58,6 +58,11 @@ const { title } = Astro.props;
 		--font-size-48: 48px;
 		--font-size-60: 60px;
 		--font-size-72: 72px;
+
+		/* colors */
+		--background-color: light-dark(oklch(95.78% 0.0058 264.53), oklch(24.29% 0.0304 283.91));
+		--text-color: light-dark(oklch(43.55% 0.043 279.33), oklch(87.87% 0.0426 272.28));
+		--teal: light-dark(oklch(60.23% 0.0981 201.1), oklch(85.85% 0.0792 182.75));
 	}
 
 	html {
@@ -73,8 +78,13 @@ const { title } = Astro.props;
 		height: 100%;
 	}
 
+	body {
+		background-color: var(--background-color);
+		color: var(--text-color);
+	}
+
 	a {
-		color: light-dark(teal, lightseagreen);
+		color: var(--teal);
 		text-decoration: none;
 	}
 
