@@ -4,8 +4,9 @@ import { Icon } from 'astro-icon/components';
 ---
 <div>
     <nav>
-        <a href="/">
+        <a href="/" class="home-button">
             <Icon name="kevin_single_logo_large"/>
+            home
         </a>
         <ul>
             <li><a href="/cv">cv</a></li>
@@ -34,6 +35,12 @@ import { Icon } from 'astro-icon/components';
             [data-icon] {
                 font-size: var(--size-96);
                 color: var(--text-color);
+            }
+
+            .home-button {
+                display: flex;
+                align-items: center;
+                gap: var(--size-8);
             }
 
             ul {
