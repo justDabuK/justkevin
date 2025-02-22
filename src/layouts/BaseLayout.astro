@@ -111,6 +111,7 @@ const { title } = Astro.props;
 	body {
 		background-color: var(--background-color);
 		color: var(--text-color);
+		font-size: var(--font-size-20);
 
 		main {
 			margin: 0 var(--size-16);
@@ -122,10 +123,24 @@ const { title } = Astro.props;
 		text-decoration: none;
 	}
 
+	p {
+		a {
+			font-weight: bold;
+		}
+	}
+
 	img {
 		max-width: 100%;
 		height: auto;
 		object-fit: contain;
+	}
+
+	pre, img {
+		border-radius: var(--size-8);
+	}
+
+	pre {
+		padding: var(--size-16);
 	}
 
 	h1 {
