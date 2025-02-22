@@ -21,7 +21,9 @@ const { title } = Astro.props;
 	</head>
 	<body>
 		<Header />
-		<slot />
+		<main>
+			<slot />
+		</main>
 	</body>
 </html>
 
@@ -109,6 +111,10 @@ const { title } = Astro.props;
 	body {
 		background-color: var(--background-color);
 		color: var(--text-color);
+
+		main {
+			margin: 0 var(--size-16);
+		}
 	}
 
 	a {
