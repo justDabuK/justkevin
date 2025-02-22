@@ -20,7 +20,7 @@ I therefore now am equipped with a Raspberry Pi ~~5~~ 4, a HyperPixel 4" square 
 
 I also after a lot of back and forth and after corrupting and reinitializing the eeprom once, managed to get the HyperPixel and the camera module to work together. Here is what I needed to add to the `/boot/firmware/config.txt` file:
 
-```
+```properties
  dtoverlay=imx708
  dtoverlay=vc4-kms-dpi-hyperpixel4sq
  disable_poe_fan=1
@@ -28,15 +28,15 @@ I also after a lot of back and forth and after corrupting and reinitializing the
  camera_auto_detect=0
  ```
 splitting this up and analyzing it:
-```
+```properties
 dtoverlay=imx708
 ```
 for telling it, you will have a camera module with the sony IMX708 sensor attached. 
-```
+```properties
 dtoverlay=vc4-kms-dpi-hyperpixel4sq
 ```
 for telling it, you will have a hyperpixel 4" square display attached. (no extra comments for if it has touch or not)  
-```
+```properties
 disable_poe_fan=1
 force_eeprom_read=0
 camera_auto_detect=0

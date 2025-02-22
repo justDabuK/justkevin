@@ -6,5 +6,10 @@ import icon from 'astro-icon';
 // https://astro.build/config
 export default defineConfig({
   integrations: [icon()],
-  site: "https://justkevin.dev"
+  site: "https://justkevin.dev",
+  markdown: {
+    shikiConfig: {
+      theme: 'catppuccin-frappe'
+    }
+  }
 });
