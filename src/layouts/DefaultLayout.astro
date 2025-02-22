@@ -2,15 +2,14 @@
 import BaseLayout from "./BaseLayout.astro";
 
 type Props = {
-    frontmatter: {
-        title: string;
-    };
+  frontmatter: {
+    title: string;
+  };
 };
 
-const {frontmatter} = Astro.props;
-
+const { frontmatter } = Astro.props;
 ---
 
 <BaseLayout title={frontmatter.title}>
-    <slot />
+  <slot />
 </BaseLayout>

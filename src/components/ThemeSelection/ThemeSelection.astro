@@ -1,50 +1,51 @@
 ---
-import { Icon } from 'astro-icon/components';
+import { Icon } from "astro-icon/components";
 ---
+
 <div>
-    <input type = radio name="theme-radio" id="light dark" value="light dark" />
-    <label for="light dark">
-        <Icon name="theme-light-dark" />
-    </label>
+  <input type="radio" name="theme-radio" id="light dark" value="light dark" />
+  <label for="light dark">
+    <Icon name="theme-light-dark" />
+  </label>
 
-    <input type = radio name="theme-radio" id="light" value="light" />
-    <label for="light">
-        <Icon name="white-balance-sunny" />
-    </label>
+  <input type="radio" name="theme-radio" id="light" value="light" />
+  <label for="light">
+    <Icon name="white-balance-sunny" />
+  </label>
 
-    <input type = radio name="theme-radio" id="dark" value="dark" />
-    <label for="dark">
-        <Icon name="moon-waning-crescent" />
-    </label>
+  <input type="radio" name="theme-radio" id="dark" value="dark" />
+  <label for="dark">
+    <Icon name="moon-waning-crescent" />
+  </label>
 </div>
 
 <style>
-    div {
-        border-left: 2px solid color-mix(in oklch, CanvasText 30%, transparent);
-        border-right: 2px solid color-mix(in oklch, CanvasText 30%, transparent);
-        padding-left: var(--size-8);
-        display: flex;
-        gap: var(--size-8);
+  div {
+    border-left: 2px solid color-mix(in oklch, CanvasText 30%, transparent);
+    border-right: 2px solid color-mix(in oklch, CanvasText 30%, transparent);
+    padding-left: var(--size-8);
+    display: flex;
+    gap: var(--size-8);
 
-        label {
-            cursor: pointer;
+    label {
+      cursor: pointer;
 
-            [data-icon] {
-                font-size: var(--font-size-30);
-                color: var(--text-color);
-            }
-        }
-
-        input {
-            display: none;
-        }
-
-        input:checked + label {
-            [data-icon] {
-                color: var(--peach);
-            }
-        }
+      [data-icon] {
+        font-size: var(--font-size-30);
+        color: var(--text-color);
+      }
     }
+
+    input {
+      display: none;
+    }
+
+    input:checked + label {
+      [data-icon] {
+        color: var(--peach);
+      }
+    }
+  }
 </style>
 
-<script src="./themeSelection.ts" />
+<script src="./themeSelection.ts"></script>

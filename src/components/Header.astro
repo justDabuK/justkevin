@@ -1,59 +1,58 @@
 ---
 import ThemeSelection from "./ThemeSelection/ThemeSelection.astro";
-import { Icon } from 'astro-icon/components';
+import { Icon } from "astro-icon/components";
 ---
+
 <div>
-    <nav>
-        <a href="/" class="home-button">
-            <Icon name="kevin_single_logo_large"/>
-            home
-        </a>
-        <ul>
-            <li><a href="/cv">cv</a></li>
-            <li><a href="/blog">blog</a></li>
-        </ul>
-    </nav>
-    <ThemeSelection />
-    <a href="/rss.xml"><Icon name="rss" /></a>
+  <nav>
+    <a href="/" class="home-button">
+      <Icon name="kevin_single_logo_large" />
+      home
+    </a>
+    <ul>
+      <li><a href="/cv">cv</a></li>
+      <li><a href="/blog">blog</a></li>
+    </ul>
+  </nav>
+  <ThemeSelection />
+  <a href="/rss.xml"><Icon name="rss" /></a>
 </div>
 
-
 <style>
-    div {
+  div {
+    display: flex;
+    gap: var(--size-8);
+    align-items: center;
+    justify-content: space-between;
+    margin: var(--size-48) var(--size-32);
+
+    nav {
+      flex: 1;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+
+      [data-icon] {
+        font-size: var(--size-96);
+        color: var(--text-color);
+      }
+
+      .home-button {
+        display: flex;
+        align-items: center;
+        gap: var(--size-8);
+      }
+
+      ul {
+        list-style: none;
         display: flex;
         gap: var(--size-8);
-        align-items: center;
-        justify-content: space-between;
-        margin: var(--size-48) var(--size-32);
-
-
-        nav {
-            flex: 1;
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-
-            [data-icon] {
-                font-size: var(--size-96);
-                color: var(--text-color);
-            }
-
-            .home-button {
-                display: flex;
-                align-items: center;
-                gap: var(--size-8);
-            }
-
-            ul {
-                list-style: none;
-                display: flex;
-                gap: var(--size-8)
-            }
-        }
-
-        [data-icon="rss"] {
-            font-size: var(--font-size-30);
-            color: var(--text-color);
-        }
+      }
     }
+
+    [data-icon="rss"] {
+      font-size: var(--font-size-30);
+      color: var(--text-color);
+    }
+  }
 </style>

@@ -1,13 +1,18 @@
 ---
 import BaseLayout from "../../layouts/BaseLayout.astro";
-const subpages = (await Astro.glob("./*.md"));
+const subpages = await Astro.glob("./*.md");
 ---
+
 <BaseLayout title="blog">
-    <h1>Blog aka. the Tinker-Diary</h1>
-    <p>I shall write stuff and you shall read</p>
-    <ul>
-        {
-            subpages.map((page) => <li><a href={page.url}>{page.frontmatter.title}</a></li>)
-        }
-    </ul>
+  <h1>Blog aka. the Tinker-Diary</h1>
+  <p>I shall write stuff and you shall read</p>
+  <ul>
+    {
+      subpages.map((page) => (
+        <li>
+          <a href={page.url}>{page.frontmatter.title}</a>
+        </li>
+      ))
+    }
+  </ul>
 </BaseLayout>

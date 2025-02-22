@@ -2,184 +2,202 @@
 import BaseLayout from "../layouts/BaseLayout.astro";
 
 type CVEntry = {
-    company: string;
-    role: string;
-    startDate: number;
-    endDate: number;
-    description: string;
-}
+  company: string;
+  role: string;
+  startDate: number;
+  endDate: number;
+  description: string;
+};
 const cvEntries: CVEntry[] = [
-    {
-        company: "Wildmoser electronic",
-        role: "Intern",
-        startDate: Date.parse('01 Sep 2014 00:00:00 +01:00'),
-        endDate: Date.parse('01 Feb 2015 00:00:00 +01:00'),
-        description: "Hardware and Software prototype development of a capacitive Sensorboard, wich has the ability to indicate rain, and to identify closer coming objects, especialy human fingers."
-    },
-    {
-        company: "Zentrale It der Hochschule München",
-        role: "Student Worker",
-        startDate: Date.parse('01 Jun 2015 00:00:00 +01:00'),
-        endDate: Date.parse('01 Sep 2016 00:00:00 +01:00'),
-        description: "Working with the Firewall pfSense, and implementation of my bachelor thesis. \"Setting up of a department capable redundant firewall with a predefined set of rules\""
-    },
-    {
-        company: "Magazino GmbH",
-        role: "Working Studen",
-        startDate: Date.parse('01 Mar 2016 00:00:00 +01:00'),
-        endDate: Date.parse('01 Oct 2016 00:00:00 +01:00'),
-        description: "Error handling for CAN- and I2C-buses in C++. Development of some firmware flash and configuration scripts in python for several electric motors, only accessible through a CAN-bus."
-    },
-    {
-        company: "Roboy",
-        role: "Lab Course",
-        startDate: Date.parse('01 Oct 2017 00:00:00 +01:00'),
-        endDate: Date.parse('01 Nov 2018 00:00:00 +01:00'),
-        description: "- Sound source localization with a uniform circular microphone array.\n" +
-            "- Development of a modular microphone array with microelectronic mechanical systems microphones and a FPGA.\n" +
-            "- Audio processing on a FPGA in Verilog\n" +
-            "- Signal filter design in matlab\n" +
-            "- Audio recording & speech to text with python and ROS \n" +
-            "- Direction of arrival visualization with built-in LEDs \n" +
-            "- Combination of the upper things by Developing SAM, the Roboy Speaker & Audio Manager \n" +
-            "- Developing SAM for Raspberry Pis with attached Matrix Creators "
-    },
-    {
-        company: "Roboy",
-        role: "Junior Angel",
-        startDate: Date.parse('01 Nov 2018 00:00:00 +01:00'),
-        endDate: Date.parse('01 Apr 2019 00:00:00 +01:00'),
-        description: "Team lead of the famous Roboy Skill Machine team"
-    },
-    {
-        company: "Roboy",
-        role: "Master Thesis",
-        startDate: Date.parse('01 Nov 2018 00:00:00 +01:00'),
-        endDate: Date.parse('01 Sep 2019 00:00:00 +01:00'),
-        description: "Exoskeleton structure optimization using muskoskeletal actuators"
-    },
-    {
-        company: "QAware GmbH",
-        role: "Working Student Softwaredevelopment",
-        startDate: Date.parse('01 Mar 2017 00:00:00 +01:00'),
-        endDate: Date.parse('01 Sep 2019 00:00:00 +01:00'),
-        description: "Dynamic project data analysis. This with Elasticsearch, ChronixDB, SonarQube and self created tools, written in Python and Java.\n" +
-            "\n" +
-            "Security-Logmonitoring with an Elastic Stack."
-    },
-    {
-        company: "QAware GmbH",
-        role: "Software Engineer",
-        startDate: Date.parse('01 Oct 2019 00:00:00 +01:00'),
-        endDate: Date.parse('01 Jan 2022 00:00:00 +01:00'),
-        description: "- Backend-Development in Java, mainly doing Maven-Projects\n" +
-            "- UI-Development with Vue in Typescript\n" +
-            "- Team-Lead with PowerPoint, Google Sheets, Zoom, Jira, Confluence and my appearance\n" +
-            "- Semantic Search on Patents using SBERT"
-    },
-    {
-        company: "QAware GmbH",
-        role: "Senior Software Engineer",
-        startDate: Date.parse('01 Jan 2022 00:00:00 +01:00'),
-        endDate: Date.parse('01 Aug 2022 00:00:00 +01:00'),
-        description: "- Team-Lead tasks including being the leading software architect, the project lead and the leading business architect\n" +
-            "- Employee account management in Go\n" +
-            "- 3D pose detection with Mediapipe in Javascript\n" +
-            "- 3D pose coordinate mapping onto a 3D avatar with Three.js in Javascript"
-    },
-    {
-        company: "Agile Robots SE",
-        role: "Software Engineer",
-        startDate: Date.parse('01 Sep 2022 00:00:00 +01:00'),
-        endDate: Date.parse('01 Jul 2024 00:00:00 +01:00'),
-        description: "- Team Lead substitute\n" +
-            "- Feature Specification\n" +
-            "- Hiring\n" +
-            "- Robot state visualization\n" +
-            "- Robot control user interface"
-    },
-    {
-        company: "Agile Robots SE",
-        role: "Senior Software Engineer",
-        startDate: Date.parse('01 Jul 2024 00:00:00 +01:00'),
-        endDate: Date.now(),
-        description: "- Team Lead substitute\n" +
-            "- Feature Specification\n" +
-            "- Hiring\n" +
-            "- Robot state visualization\n" +
-            "- Robot control user interface"
-    }
-]
+  {
+    company: "Wildmoser electronic",
+    role: "Intern",
+    startDate: Date.parse("01 Sep 2014 00:00:00 +01:00"),
+    endDate: Date.parse("01 Feb 2015 00:00:00 +01:00"),
+    description:
+      "Hardware and Software prototype development of a capacitive Sensorboard, wich has the ability to indicate rain, and to identify closer coming objects, especialy human fingers.",
+  },
+  {
+    company: "Zentrale It der Hochschule München",
+    role: "Student Worker",
+    startDate: Date.parse("01 Jun 2015 00:00:00 +01:00"),
+    endDate: Date.parse("01 Sep 2016 00:00:00 +01:00"),
+    description:
+      'Working with the Firewall pfSense, and implementation of my bachelor thesis. "Setting up of a department capable redundant firewall with a predefined set of rules"',
+  },
+  {
+    company: "Magazino GmbH",
+    role: "Working Studen",
+    startDate: Date.parse("01 Mar 2016 00:00:00 +01:00"),
+    endDate: Date.parse("01 Oct 2016 00:00:00 +01:00"),
+    description:
+      "Error handling for CAN- and I2C-buses in C++. Development of some firmware flash and configuration scripts in python for several electric motors, only accessible through a CAN-bus.",
+  },
+  {
+    company: "Roboy",
+    role: "Lab Course",
+    startDate: Date.parse("01 Oct 2017 00:00:00 +01:00"),
+    endDate: Date.parse("01 Nov 2018 00:00:00 +01:00"),
+    description:
+      "- Sound source localization with a uniform circular microphone array.\n" +
+      "- Development of a modular microphone array with microelectronic mechanical systems microphones and a FPGA.\n" +
+      "- Audio processing on a FPGA in Verilog\n" +
+      "- Signal filter design in matlab\n" +
+      "- Audio recording & speech to text with python and ROS \n" +
+      "- Direction of arrival visualization with built-in LEDs \n" +
+      "- Combination of the upper things by Developing SAM, the Roboy Speaker & Audio Manager \n" +
+      "- Developing SAM for Raspberry Pis with attached Matrix Creators ",
+  },
+  {
+    company: "Roboy",
+    role: "Junior Angel",
+    startDate: Date.parse("01 Nov 2018 00:00:00 +01:00"),
+    endDate: Date.parse("01 Apr 2019 00:00:00 +01:00"),
+    description: "Team lead of the famous Roboy Skill Machine team",
+  },
+  {
+    company: "Roboy",
+    role: "Master Thesis",
+    startDate: Date.parse("01 Nov 2018 00:00:00 +01:00"),
+    endDate: Date.parse("01 Sep 2019 00:00:00 +01:00"),
+    description:
+      "Exoskeleton structure optimization using muskoskeletal actuators",
+  },
+  {
+    company: "QAware GmbH",
+    role: "Working Student Softwaredevelopment",
+    startDate: Date.parse("01 Mar 2017 00:00:00 +01:00"),
+    endDate: Date.parse("01 Sep 2019 00:00:00 +01:00"),
+    description:
+      "Dynamic project data analysis. This with Elasticsearch, ChronixDB, SonarQube and self created tools, written in Python and Java.\n" +
+      "\n" +
+      "Security-Logmonitoring with an Elastic Stack.",
+  },
+  {
+    company: "QAware GmbH",
+    role: "Software Engineer",
+    startDate: Date.parse("01 Oct 2019 00:00:00 +01:00"),
+    endDate: Date.parse("01 Jan 2022 00:00:00 +01:00"),
+    description:
+      "- Backend-Development in Java, mainly doing Maven-Projects\n" +
+      "- UI-Development with Vue in Typescript\n" +
+      "- Team-Lead with PowerPoint, Google Sheets, Zoom, Jira, Confluence and my appearance\n" +
+      "- Semantic Search on Patents using SBERT",
+  },
+  {
+    company: "QAware GmbH",
+    role: "Senior Software Engineer",
+    startDate: Date.parse("01 Jan 2022 00:00:00 +01:00"),
+    endDate: Date.parse("01 Aug 2022 00:00:00 +01:00"),
+    description:
+      "- Team-Lead tasks including being the leading software architect, the project lead and the leading business architect\n" +
+      "- Employee account management in Go\n" +
+      "- 3D pose detection with Mediapipe in Javascript\n" +
+      "- 3D pose coordinate mapping onto a 3D avatar with Three.js in Javascript",
+  },
+  {
+    company: "Agile Robots SE",
+    role: "Software Engineer",
+    startDate: Date.parse("01 Sep 2022 00:00:00 +01:00"),
+    endDate: Date.parse("01 Jul 2024 00:00:00 +01:00"),
+    description:
+      "- Team Lead substitute\n" +
+      "- Feature Specification\n" +
+      "- Hiring\n" +
+      "- Robot state visualization\n" +
+      "- Robot control user interface",
+  },
+  {
+    company: "Agile Robots SE",
+    role: "Senior Software Engineer",
+    startDate: Date.parse("01 Jul 2024 00:00:00 +01:00"),
+    endDate: Date.now(),
+    description:
+      "- Team Lead substitute\n" +
+      "- Feature Specification\n" +
+      "- Hiring\n" +
+      "- Robot state visualization\n" +
+      "- Robot control user interface",
+  },
+];
 ---
+
 <BaseLayout title="CV">
-    <h1>Curriculum Vitae</h1>
-    <p>I'm unsure yet about how to properly display my CV. I was thinking about maybe having some 3D renderings or animations that highlight what I did at that places. But for now a simple table will need to suffice.</p>
-    <table>
-        <thead>
-            <tr>
-                <th>Time period</th>
-                <th>Company</th>
-                <th>Role</th>
-                <th>Description</th>
-            </tr>
-        </thead>
-        <tbody>
-        {
-            cvEntries.map((entry) => (
-                <tr>
-                    <td>{new Date(entry.startDate).toLocaleDateString()} - {new Date(entry.endDate).toLocaleDateString()}</td>
-                    <td>{entry.company}</td>
-                    <td>{entry.role}</td>
-                    <td>{entry.description}</td>
-                </tr>
-            ))
-        }
-        </tbody>
-    </table>
+  <h1>Curriculum Vitae</h1>
+  <p>
+    I'm unsure yet about how to properly display my CV. I was thinking about
+    maybe having some 3D renderings or animations that highlight what I did at
+    that places. But for now a simple table will need to suffice.
+  </p>
+  <table>
+    <thead>
+      <tr>
+        <th>Time period</th>
+        <th>Company</th>
+        <th>Role</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      {
+        cvEntries.map((entry) => (
+          <tr>
+            <td>
+              {new Date(entry.startDate).toLocaleDateString()} -{" "}
+              {new Date(entry.endDate).toLocaleDateString()}
+            </td>
+            <td>{entry.company}</td>
+            <td>{entry.role}</td>
+            <td>{entry.description}</td>
+          </tr>
+        ))
+      }
+    </tbody>
+  </table>
 </BaseLayout>
 
 <style>
-    table {
-        border-collapse: unset;
-        border-spacing: 0;
-        width: 100%;
+  table {
+    border-collapse: unset;
+    border-spacing: 0;
+    width: 100%;
 
-        :is(td, th) {
-            border-style: solid;
-            padding: 0.5em 1em;
-            border-block-width: var(--size-1) 0;
-            border-inline-width: var(--size-1) 0;
-            &:last-of-type {
-                border-inline-width: var(--size-1);
-            }
-        }
-
-        :is(tr):last-of-type {
-            & td {
-                border-block-width: var(--size-1);
-            }
-        }
-
-        th {
-            &:first-of-type {
-                border-start-start-radius: var(--size-8);
-            }
-            &:last-of-type {
-                border-start-end-radius: var(--size-8);
-            }
-        }
-
-        tr {
-            &:last-of-type {
-                & td {
-                    &:first-of-type {
-                        border-end-start-radius: var(--size-8);
-                    }
-                    &:last-of-type {
-                        border-end-end-radius: var(--size-8);
-                    }
-                }
-            }
-        }
+    :is(td, th) {
+      border-style: solid;
+      padding: 0.5em 1em;
+      border-block-width: var(--size-1) 0;
+      border-inline-width: var(--size-1) 0;
+      &:last-of-type {
+        border-inline-width: var(--size-1);
+      }
     }
+
+    :is(tr):last-of-type {
+      & td {
+        border-block-width: var(--size-1);
+      }
+    }
+
+    th {
+      &:first-of-type {
+        border-start-start-radius: var(--size-8);
+      }
+      &:last-of-type {
+        border-start-end-radius: var(--size-8);
+      }
+    }
+
+    tr {
+      &:last-of-type {
+        & td {
+          &:first-of-type {
+            border-end-start-radius: var(--size-8);
+          }
+          &:last-of-type {
+            border-end-end-radius: var(--size-8);
+          }
+        }
+      }
+    }
+  }
 </style>
