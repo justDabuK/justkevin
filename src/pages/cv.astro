@@ -147,6 +147,13 @@ const cvEntries: CVEntry[] = [
     ],
   },
 ];
+
+function formatDate(date: number) {
+  return new Date(date).toLocaleDateString("en-US", {
+    year: "numeric",
+    month: "short",
+  });
+}
 ---
 
 <BaseLayout title="CV">
@@ -171,8 +178,7 @@ const cvEntries: CVEntry[] = [
         cvEntries.map((entry) => (
           <tr>
             <td>
-              {new Date(entry.startDate).toLocaleDateString()} -{" "}
-              {new Date(entry.endDate).toLocaleDateString()}
+              {formatDate(entry.startDate)} - {formatDate(entry.endDate)}
             </td>
             <td>{entry.company}</td>
             <td>{entry.positions.join(", ")}</td>
