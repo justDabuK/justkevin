@@ -1,5 +1,7 @@
 ---
 import BaseLayout from "../layouts/BaseLayout.astro";
+import { Image } from "astro:assets";
+import profilePicture from "../assets/profile-pictures/KevinJust_18-01-183-web.jpg";
 
 type CVEntry = {
   company: string;
@@ -163,73 +165,98 @@ function formatDate(date: number) {
     expertise. I currently specialize in frontend development. My strong suit
     are applications that process and visualize complex data, preferably in 3D.
   </p>
-  <table>
-    <thead>
-      <tr>
-        <th>Time period</th>
-        <th>Company</th>
-        <th>Positions</th>
-        <th>Description</th>
-        <th>Skills</th>
-      </tr>
-    </thead>
-    <tbody>
-      {
-        cvEntries.map((entry) => (
-          <tr>
-            <td>
-              {formatDate(entry.startDate)} - {formatDate(entry.endDate)}
-            </td>
-            <td>{entry.company}</td>
-            <td>{entry.positions.join(", ")}</td>
-            <td>{entry.description}</td>
-            <td>{entry.skills.join(", ")}</td>
-          </tr>
-        ))
-      }
-    </tbody>
-  </table>
+  <div class="cv-wrapper">
+    <div class="cv-sidebar">
+      <Image src={profilePicture} alt="Profile picture" />
+    </div>
+    <table>
+      <thead>
+        <tr>
+          <th>Time period</th>
+          <th>Company</th>
+          <th>Positions</th>
+          <th>Description</th>
+          <th>Skills</th>
+        </tr>
+      </thead>
+      <tbody>
+        {
+          cvEntries.map((entry) => (
+            <tr>
+              <td>
+                {formatDate(entry.startDate)} - {formatDate(entry.endDate)}
+              </td>
+              <td>{entry.company}</td>
+              <td>{entry.positions.join(", ")}</td>
+              <td>{entry.description}</td>
+              <td>{entry.skills.join(", ")}</td>
+            </tr>
+          ))
+        }
+      </tbody>
+    </table>
+  </div>
 </BaseLayout>
 
 <style>
-  table {
-    border-collapse: unset;
-    border-spacing: 0;
-    width: 100%;
+  .cv-wrapper {
+    display: grid;
+    grid-template-columns: auto 1fr;
+    gap: var(--size-4);
 
-    :is(td, th) {
-      border-style: solid;
-      padding: 0.5em 1em;
-      border-block-width: var(--size-1) 0;
-      border-inline-width: var(--size-1) 0;
-      &:last-of-type {
-        border-inline-width: var(--size-1);
+    .cv-sidebar {
+      display: flex;
+      flex-direction: column;
+      gap: var(--size-4);
+
+      img {
+        object-fit: cover;
+        border-radius: 100vw;
+        height: var(--size-128);
+        width: auto;
+        border: var(--size-4) solid var(--subtext1);
       }
     }
 
-    :is(tr):last-of-type {
-      & td {
-        border-block-width: var(--size-1);
-      }
-    }
+    table {
+      border-collapse: unset;
+      border-spacing: 0;
+      width: 100%;
 
-    th {
-      &:first-of-type {
-        border-start-start-radius: var(--size-8);
+      :is(td, th) {
+        border-style: solid;
+        padding: 0.5em 1em;
+        border-block-width: var(--size-1) 0;
+        border-inline-width: var(--size-1) 0;
+        &:last-of-type {
+          border-inline-width: var(--size-1);
+        }
       }
-      &:last-of-type {
-        border-start-end-radius: var(--size-8);
-      }
-    }
 
-    tr {
-      &:last-of-type {
+      :is(tr):last-of-type {
         & td {
-          &:first-of-type {
-            border-end-start-radius: var(--size-8);
-          }
-          &:last-of-type {
-            border-end-end-radius: var(--size-8);
+          border-block-width: var(--size-1);
+        }
+      }
+
+      th {
+        &:first-of-type {
+          border-start-start-radius: var(--size-8);
+        }
+        &:last-of-type {
+          border-start-end-radius: var(--size-8);
+        }
+      }
+
+      tr {
+        &:last-of-type {
+          & td {
+            &:first-of-type {
+              border-end-start-radius: var(--size-8);
+            }
+            &:last-of-type {
+              border-end-end-radius: var(--size-8);
+            }
           }
         }
       }
