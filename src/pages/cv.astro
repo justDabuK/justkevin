@@ -2,15 +2,9 @@
 import BaseLayout from "../layouts/BaseLayout.astro";
 import { Image } from "astro:assets";
 import profilePicture from "../assets/profile-pictures/KevinJust_18-01-183-web.jpg";
+import { CVEntry } from "../types/CVEntry";
+import CVEntryElement from "../components/CVEntryElement.astro";
 
-type CVEntry = {
-  company: string;
-  positions: string[];
-  startDate: number;
-  endDate: number;
-  description: string;
-  skills: string[];
-};
 const cvEntries: CVEntry[] = [
   {
     company: "Wildmoser electronic",
@@ -150,13 +144,6 @@ const cvEntries: CVEntry[] = [
   },
 ];
 
-function formatDate(date: number) {
-  return new Date(date).toLocaleDateString("en-US", {
-    year: "numeric",
-    month: "short",
-  });
-}
-
 /*
 Thoughts, so that I don't forget them
 - cv entries should be list
@@ -193,19 +180,7 @@ Thoughts, so that I don't forget them
         </tr>
       </thead>
       <tbody>
-        {
-          cvEntries.map((entry) => (
-            <tr>
-              <td>
-                {formatDate(entry.startDate)} - {formatDate(entry.endDate)}
-              </td>
-              <td>{entry.company}</td>
-              <td>{entry.positions.join(", ")}</td>
-              <td>{entry.description}</td>
-              <td>{entry.skills.join(", ")}</td>
-            </tr>
-          ))
-        }
+        {cvEntries.map((entry) => <CVEntryElement entry={entry} />)}
       </tbody>
     </table>
   </div>
