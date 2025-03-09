@@ -8,17 +8,47 @@ const { entry } = Astro.props;
 function formatDate(date: number) {
   return new Date(date).toLocaleDateString("en-US", {
     year: "numeric",
-    month: "short",
+    month: "numeric",
   });
 }
 ---
 
-<tr>
-  <td>
-    {formatDate(entry.startDate)} - {formatDate(entry.endDate)}
-  </td>
-  <td>{entry.company}</td>
-  <td>{entry.positions.join(", ")}</td>
-  <td>{entry.description}</td>
-  <td>{entry.skills.join(", ")}</td>
-</tr>
+<li>
+  <div class="list-point">
+    <div class="point"></div>
+    <span>{formatDate(entry.startDate)} - {formatDate(entry.endDate)}</span>
+  </div>
+  <div class="content">
+    <h3>{entry.positions.join(", ")} at {entry.company}</h3>
+    <p>{entry.description}</p>
+    <p><strong>{entry.skills.join(", ")}</strong></p>
+  </div>
+</li>
+
+<style>
+  li {
+    list-style: none;
+    display: flex;
+    align-items: center;
+    gap: var(--size-16);
+
+    .list-point {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      gap: var(--size-8);
+
+      .point {
+        --point-size: var(--size-12);
+        width: var(--point-size);
+        height: var(--point-size);
+        background-color: var(--lavender);
+        border-radius: 100%;
+      }
+
+      span {
+        font-size: var(--font-size-14);
+      }
+    }
+  }
+</style>

@@ -169,20 +169,9 @@ Thoughts, so that I don't forget them
     <div class="cv-sidebar">
       <Image src={profilePicture} alt="Profile picture" />
     </div>
-    <table>
-      <thead>
-        <tr>
-          <th>Time period</th>
-          <th>Company</th>
-          <th>Positions</th>
-          <th>Description</th>
-          <th>Skills</th>
-        </tr>
-      </thead>
-      <tbody>
-        {cvEntries.map((entry) => <CVEntryElement entry={entry} />)}
-      </tbody>
-    </table>
+    <ul>
+      {cvEntries.map((entry) => <CVEntryElement entry={entry} />)}
+    </ul>
   </div>
 </BaseLayout>
 
@@ -203,50 +192,6 @@ Thoughts, so that I don't forget them
         height: var(--size-128);
         width: auto;
         border: var(--size-4) solid var(--subtext1);
-      }
-    }
-
-    table {
-      border-collapse: unset;
-      border-spacing: 0;
-      width: 100%;
-
-      :is(td, th) {
-        border-style: solid;
-        padding: 0.5em 1em;
-        border-block-width: var(--size-1) 0;
-        border-inline-width: var(--size-1) 0;
-        &:last-of-type {
-          border-inline-width: var(--size-1);
-        }
-      }
-
-      :is(tr):last-of-type {
-        & td {
-          border-block-width: var(--size-1);
-        }
-      }
-
-      th {
-        &:first-of-type {
-          border-start-start-radius: var(--size-8);
-        }
-        &:last-of-type {
-          border-start-end-radius: var(--size-8);
-        }
-      }
-
-      tr {
-        &:last-of-type {
-          & td {
-            &:first-of-type {
-              border-end-start-radius: var(--size-8);
-            }
-            &:last-of-type {
-              border-end-end-radius: var(--size-8);
-            }
-          }
-        }
       }
     }
   }
