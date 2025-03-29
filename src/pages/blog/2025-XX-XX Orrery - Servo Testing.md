@@ -28,7 +28,7 @@ I thought of iterating from the max to the min volume fo rboth servos in order t
 
 <details>
 <summary>
-    Here is the code I used for the continuos servo
+    Here is the code I used for testing the servos
 </summary>
 
 ```python
@@ -38,135 +38,61 @@ import time
 
 led_bar = WS2812(servo2040.NUM_LEDS, 1, 0, servo2040.LED_DATA)
 led_bar.start()
-
-black_servo = Servo(servo2040.SERVO_6)
-
-current_value = -90
-delta_value = 1
-
 led_brightness = 130
+number_of_leds = 6
 
+def lights_out():
+    led_bar.set_rgb(0, 0, 0, 0)
+    led_bar.set_rgb(1, 0, 0, 0)
+    led_bar.set_rgb(2, 0, 0, 0)
+    led_bar.set_rgb(3, 0, 0, 0)
+    led_bar.set_rgb(4, 0, 0, 0)
+    led_bar.set_rgb(5, 0, 0, 0)
+
+servo = Servo(servo2040.SERVO_1) # calibration=0 => ANGULAR (default) | calibration=2 => CONTINUOS
+
+min_value = servo.min_value()
+max_value = servo.max_value()
+
+# we want to let the strip of leds indicate where we are between min & max, so we need a delta value that helps us with that
+led_delta = (abs(min_value) + abs(max_value)) / number_of_leds
+
+current_value = min_value
+step = (abs(min_value) + abs(max_value)) / 100
+
+# we will reverse the step when we reach a limit, so we need a current_step to keep track of that
+current_step = step
+
+print("---- Initiating test sequence...")
+print(f"min value: {min_value}")
+print(f"max value: {max_value}")
+print(f"led_delta: {led_delta}")
+print(f"step: {step}\n")
+
+print("---- Let's gooooooooooo....")
 while True:
-    print(f"current value: {current_value} | {delta_value}")
-    if -90 <= current_value < -60:
-        led_bar.set_rgb(0, 0, led_brightness, led_brightness)
-        led_bar.set_rgb(1, 0, 0, 0)
-        led_bar.set_rgb(2, 0, 0, 0)
-        led_bar.set_rgb(3, 0, 0, 0)
-        led_bar.set_rgb(4, 0, 0, 0)
-    elif -60 <= current_value < -30:
-        led_bar.set_rgb(0, 0, 0, 0)
-        led_bar.set_rgb(1, 0, led_brightness, led_brightness)
-        led_bar.set_rgb(2, 0, 0, 0)
-        led_bar.set_rgb(3, 0, 0, 0)
-        led_bar.set_rgb(4, 0, 0, 0)
-    elif -30 <= current_value < 0:
-        led_bar.set_rgb(0, 0, 0, 0)
-        led_bar.set_rgb(1, 0, 0, 0)
-        led_bar.set_rgb(2, 0, led_brightness, led_brightness)
-        led_bar.set_rgb(3, 0, 0, 0)
-        led_bar.set_rgb(4, 0, 0, 0)
-    elif 0 <= current_value < 30:
-        led_bar.set_rgb(0, 0, 0, 0)
-        led_bar.set_rgb(1, 0, 0, 0)
-        led_bar.set_rgb(2, led_brightness, 0, led_brightness)
-        led_bar.set_rgb(3, 0, 0, 0)
-        led_bar.set_rgb(4, 0, 0, 0)
-    elif 30 <= current_value < 60:
-        led_bar.set_rgb(0, 0, 0, 0)
-        led_bar.set_rgb(1, 0, 0, 0)
-        led_bar.set_rgb(2, 0, 0, 0)
-        led_bar.set_rgb(3, 0, led_brightness, led_brightness)
-        led_bar.set_rgb(4, 0, 0, 0)
-    elif 60 <= current_value < 90:
-        led_bar.set_rgb(0, 0, 0, 0)
-        led_bar.set_rgb(1, 0, 0, 0)
-        led_bar.set_rgb(2, 0, 0, 0)
-        led_bar.set_rgb(3, 0, 0, 0)
-        led_bar.set_rgb(4, 0, led_brightness, led_brightness)
-    else:
-        print(f"how did we end up here? value: {current_value}")
+    normalized_current_value = (current_value + abs(min_value))
+    how_often_does_led_delta_fit = int(normalized_current_value / led_delta)
 
-    black_servo.value(current_value)
+    # delta can fit number_of_leds times when it reaches max_value, thefore upper boundary
+    led_to_light = min(how_often_does_led_delta_fit, number_of_leds - 1)
 
-    current_value += delta_value
-    if current_value >= 90:
-        delta_value = -1
-    if current_value <= -90:
-        delta_value = 1
+    lights_out()
+    led_bar.set_rgb(led_to_light, 0, led_brightness, led_brightness)
 
-    time.sleep_ms(100)
+    servo.value(current_value)
 
-```
-
-</details><details>
-<summary>
-    And here is the code I used for the metal gear one
-</summary>
-
-```python
-from plasma import WS2812
-from servo import Servo, servo2040
-import time
-
-led_bar = WS2812(servo2040.NUM_LEDS, 1, 0, servo2040.LED_DATA)
-led_bar.start()
-
-black_servo = Servo(servo2040.SERVO_6)
-
-current_value = -90
-delta_value = 1
-
-led_brightness = 130
-
-while True:
-    print(f"current value: {current_value} | {delta_value}")
-    if -90 <= current_value < -60:
-        led_bar.set_rgb(0, 0, led_brightness, led_brightness)
-        led_bar.set_rgb(1, 0, 0, 0)
-        led_bar.set_rgb(2, 0, 0, 0)
-        led_bar.set_rgb(3, 0, 0, 0)
-        led_bar.set_rgb(4, 0, 0, 0)
-    elif -60 <= current_value < -30:
-        led_bar.set_rgb(0, 0, 0, 0)
-        led_bar.set_rgb(1, 0, led_brightness, led_brightness)
-        led_bar.set_rgb(2, 0, 0, 0)
-        led_bar.set_rgb(3, 0, 0, 0)
-        led_bar.set_rgb(4, 0, 0, 0)
-    elif -30 <= current_value < 0:
-        led_bar.set_rgb(0, 0, 0, 0)
-        led_bar.set_rgb(1, 0, 0, 0)
-        led_bar.set_rgb(2, 0, led_brightness, led_brightness)
-        led_bar.set_rgb(3, 0, 0, 0)
-        led_bar.set_rgb(4, 0, 0, 0)
-    elif 0 <= current_value < 30:
-        led_bar.set_rgb(0, 0, 0, 0)
-        led_bar.set_rgb(1, 0, 0, 0)
-        led_bar.set_rgb(2, led_brightness, 0, led_brightness)
-        led_bar.set_rgb(3, 0, 0, 0)
-        led_bar.set_rgb(4, 0, 0, 0)
-    elif 30 <= current_value < 60:
-        led_bar.set_rgb(0, 0, 0, 0)
-        led_bar.set_rgb(1, 0, 0, 0)
-        led_bar.set_rgb(2, 0, 0, 0)
-        led_bar.set_rgb(3, 0, led_brightness, led_brightness)
-        led_bar.set_rgb(4, 0, 0, 0)
-    elif 60 <= current_value < 90:
-        led_bar.set_rgb(0, 0, 0, 0)
-        led_bar.set_rgb(1, 0, 0, 0)
-        led_bar.set_rgb(2, 0, 0, 0)
-        led_bar.set_rgb(3, 0, 0, 0)
-        led_bar.set_rgb(4, 0, led_brightness, led_brightness)
-    else:
-        print(f"how did we end up here? value: {current_value}")
-
-    black_servo.value(current_value)
-
-    current_value += delta_value
-    if current_value >= 90:
-        delta_value = -1
-    if current_value <= -90:
-        delta_value = 1
+    current_value += current_step
+    if current_value >= max_value:
+        current_step = -1 * step
+        current_value = max_value
+        print("REACHED MAX -> back to min")
+        led_bar.set_rgb(led_to_light, led_brightness, 0, led_brightness)
+    if current_value <= min_value:
+        current_step = step
+        current_value = min_value
+        print("REACHED MIN -> back to max")
+        led_bar.set_rgb(led_to_light, led_brightness, 0, led_brightness)
 
     time.sleep_ms(100)
 
