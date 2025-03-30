@@ -24,7 +24,9 @@ So having all these components I followed [pimoronis documentation on the servo 
 
 I thought of iterating from the max to the min volume fo rboth servos in order to see what they would do. The LEDs on the board indicate where on our way from min to max we are.
 
-**_TODO: insert videos of the testing_**
+<iframe width="560" height="315" src="https://www.youtube.com/embed/eAZtbUWYL1s?si=w2MAwK_iDxWN8Hwy" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" referrerpolicy="strict-origin-when-cross-origin" allowfullscreen></iframe>
+
+<iframe width="560" height="315" src="https://www.youtube.com/embed/GMEHKxh9jBU?si=I6cPA_owxQXZGX87" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" referrerpolicy="strict-origin-when-cross-origin" allowfullscreen></iframe>
 
 <details>
 <summary>
