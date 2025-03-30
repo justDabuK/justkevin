@@ -1,5 +1,5 @@
 const html = document.querySelector("html");
-let theme = localStorage.getItem("theme");
+let theme = localStorage.getItem("theme") ?? "light dark";
 const radios: NodeListOf<HTMLInputElement> = document.querySelectorAll(
   'input[name="theme-radio"]',
 );
