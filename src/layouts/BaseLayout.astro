@@ -170,6 +170,7 @@ const { title } = Astro.props;
 
     main {
       margin: 0 var(--size-16);
+      padding-bottom: var(--size-32);
     }
   }
 
@@ -184,6 +185,10 @@ const { title } = Astro.props;
     }
   }
 
+  iframe {
+    max-width: 100%;
+  }
+
   img {
     max-width: 100%;
     height: auto;
@@ -191,7 +196,8 @@ const { title } = Astro.props;
   }
 
   pre,
-  img {
+  img,
+  iframe {
     border-radius: var(--size-8);
   }
 
