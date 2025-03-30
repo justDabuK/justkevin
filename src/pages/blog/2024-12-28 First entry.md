@@ -1,6 +1,7 @@
 ---
 layout: "@layouts/DefaultLayout.astro"
 title: "First entry"
+date: "2024-12-28"
 ---
 
 # First entry

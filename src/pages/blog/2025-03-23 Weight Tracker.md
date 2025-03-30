@@ -1,6 +1,7 @@
 ---
 layout: "@layouts/DefaultLayout.astro"
 title: "Weight tracker"
+date: "2025-03-23"
 ---
 
 # Weight Tracker
@@ -23,19 +24,19 @@ needs, it does have a grain of truth in it.
 
 Again oversimplification. But often enough this is what a lot of projects have in common. And my habit tracker is no exception.
 
-So after remembering that quote I thought "why not. What should I be ashamed of, let's try using google sheets at least for my weight data". And so I did what you can see below. 
+So after remembering that quote I thought "why not. What should I be ashamed of, let's try using google sheets at least for my weight data". And so I did what you can see below.
 
 ![weight-tracker-google-sheet.png](@assets/habbit-tracker/weight-tracker-google-sheet.png)
 
 It is simple, it is stupid, and it is actually all I need. Setting up the data was even easier than I expected
 
-![table-data-setup.png](@assets/habbit-tracker/table-data-setup.png). 
+![table-data-setup.png](@assets/habbit-tracker/table-data-setup.png).
 
-And I already tried out extending the table and the chart automagically updates accordingly. Like my colleague said, 
-all I needed was excel, or in my case google sheets. 
+And I already tried out extending the table and the chart automagically updates accordingly. Like my colleague said,
+all I needed was excel, or in my case google sheets.
 
-Let's see if this will help me keep track of my weight as I wanted to. 
+Let's see if this will help me keep track of my weight as I wanted to.
 
-Keep it simple stupid my friends. See ya, 
+Keep it simple stupid my friends. See ya,
 
 Kevin

@@ -1,6 +1,7 @@
 ---
 layout: "@layouts/DefaultLayout.astro"
 title: "Habbit Tracker - The beginning"
+date: "2025-03-07"
 ---
 
 # Habbit Tracker - The beginning

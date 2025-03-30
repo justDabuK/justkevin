@@ -1,6 +1,7 @@
 ---
 layout: "@layouts/DefaultLayout.astro"
 title: "PokedexPi - The story so far"
+date: "2025-01-09"
 ---
 
 # PokedexPi - The story so far

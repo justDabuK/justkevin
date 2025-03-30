@@ -1,6 +1,7 @@
 ---
 layout: "@layouts/DefaultLayout.astro"
 title: "Orrery - Servo Testing"
+date: "2025-03-30"
 ---
 
 # Orrery - Servo Testing
