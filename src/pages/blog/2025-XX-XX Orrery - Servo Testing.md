@@ -118,7 +118,7 @@ Kevin
 
 ---
 
-Source:
+sources:
 
 - [9g continous micro servo](https://eu.robotshop.com/de/products/9g-dauerrotations-micro-servo)
 - [2,5 kg Goteck metal gear micro servo](https://eu.robotshop.com/de/products/25-kg-goteck-metallgetriebe-micro-servo)
