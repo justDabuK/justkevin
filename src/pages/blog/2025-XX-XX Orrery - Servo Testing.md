@@ -110,7 +110,7 @@ while True:
 
 Now after testing the servos and thinking about what I want to do with them, it seems obvious that I will need more of the continuos rotation servos, as I plan to make little balls rotate continuously.
 
-I am still unsure how to best translate the rotation of earth around the sun to the little servo, but that's a problem for future Kevin.
+I am still unsure how to best translate the rotation of the planets around the sun to the little servos, but that's a problem for future Kevin.
 
 See ya in the next one,
 
