@@ -7,22 +7,26 @@ title: "Orrery - Servo Testing"
 
 Many many moons ago, I read something about the [DeMoor Orrery](https://demoor-orrery.com/en) in [Issue 114 of the MagPi (Raspberry Pi Official Magazine these days)](https://magazine.raspberrypi.com/issues/114). An [orrery](https://en.wikipedia.org/wiki/Orrery), for all the other uneducated people like me, is something I would call a "planetary clock", that shows the positions of the planets in our solar system, typically with the sun as center point.
 
-And this particular article somewhow burned itself into my brain. While having no greater use at all, it would still be so cool to see at all times, where which planet is currently. And after coming back to this thought time and time again, the urge to build it myself finally became strong enough for me to do something about it.
+And this particular article somehow burned itself into my brain. While having no greater use at all, it would still be so cool to see at all times when which planet is currently. And after coming back to this thought time and time again, the urge to build it myself finally became strong enough for me to do something about it.
 
-"Now Kevin", I thought, "if you want to move stuff, you'll need motors. Probably servo motors in case you want to move the planets to specific positions". And fortunately I ordered so far unused servo motors from the robot shop like 2 to 3 years ago.
+## Hardware
 
-Namely, continous rotation micro servos and metal gear micro servos
+_"Now Kevin"_, I thought, _"if you want to move stuff, you'll need motors. Probably servo motors in case you want to move the planets to specific positions"_. And fortunately I ordered so far unused servo motors from the robot shop like 2 to 3 years ago.
+
+Namely, continuous rotation micro servos and metal gear micro servos
 
 ![9g-continuous-rotation-micro-servo.jpg](../../assets/orrery/9g-continuous-rotation-micro-servo.jpg)
 ![25kg-goteck-metal-gear-micro-servo.jpg](../../assets/orrery/25kg-goteck-metal-gear-micro-servo.jpg)
 
-Now while thinking about what hardware to use in order to power these I realized that I had another piece of hardware that I also ordered ages ago and never used. A [servo 2040 from Pimoroni](https://shop.pimoroni.com/products/servo-2040)
+Now while thinking about what hardware to use in order to power these, I realized that I had another piece of hardware that I also ordered ages ago and never used. A [servo 2040 from Pimoroni](https://shop.pimoroni.com/products/servo-2040)
 
 ![servo-2040-1_768x768_crop_center.webp](../../assets/orrery/servo-2040.webp)
 
+## Software
+
 So having all these components I followed [pimoronis documentation on the servo 2040](https://github.com/pimoroni/pimoroni-pico/tree/main/micropython/modules/servo) in order to see how the servos behave and how I could use them.
 
-I thought of iterating from the max to the min volume fo rboth servos in order to see what they would do. The LEDs on the board indicate where on our way from min to max we are.
+I thought of iterating from the max to the min value for both servos in order to see what they would do. The LEDs on the board indicate where on our way from min to max we are.
 
 <iframe width="560" height="315" src="https://www.youtube.com/embed/eAZtbUWYL1s?si=w2MAwK_iDxWN8Hwy" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" referrerpolicy="strict-origin-when-cross-origin" allowfullscreen></iframe>
 
@@ -101,6 +105,16 @@ while True:
 ```
 
 </details>
+
+## Conclusion
+
+Now after testing the servos and thinking about what I want to do with them, it seems obvious that I will need more of the continuos rotation servos, as I plan to make little balls rotate continuously.
+
+I am still unsure how to best translate the rotation of earth around the sun to the little servo, but that's a problem for future Kevin.
+
+See ya in the next one,
+
+Kevin
 
 ---
 
