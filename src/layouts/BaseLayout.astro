@@ -175,8 +175,17 @@ const { title } = Astro.props;
   }
 
   a {
-    color: var(--teal);
-    text-decoration: none;
+    --link-color: var(--teal);
+
+    color: var(--link-color);
+    text-decoration: underline;
+    text-decoration-color: transparent;
+    transition: all 0.2s ease-out;
+
+    &:hover {
+      text-decoration-color: var(--link-color);
+      transition: all 0.2s ease-in;
+    }
   }
 
   p {

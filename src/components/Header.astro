@@ -55,6 +55,11 @@ import { Icon } from "astro-icon/components";
     [data-icon] {
       font-size: var(--font-size-30);
       color: var(--text-color);
+        transition: color 0.2s ease-in-out;
+
+        &:hover {
+            color: var(--teal);
+        }
     }
   }
 </style>
