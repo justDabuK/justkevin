@@ -267,7 +267,7 @@ Thoughts, so that I don't forget them
         padding: 0;
         display: flex;
         flex-direction: column;
-        gap: var(--size-24);
+        gap: var(--size-32);
 
         &.skill-list {
           gap: var(--size-8);
@@ -291,8 +291,10 @@ Thoughts, so that I don't forget them
               gap: var(--size-4);
 
               .point {
-                width: var(--size-8);
-                height: var(--size-8);
+                --point-size: var(--size-8);
+
+                width: var(--point-size);
+                height: var(--point-size);
                 border-radius: 100vw;
                 background-color: color-mix(in oklch, var(--skill-color), transparent 60%);
 
@@ -311,7 +313,7 @@ Thoughts, so that I don't forget them
       padding: 0 0 0 var(--size-16);
       display: grid;
       grid-template-columns: auto 1fr;
-      gap: var(--size-16);
+      gap: var(--size-24);
     }
 
     @media (min-width: 1200px) {
@@ -329,6 +331,10 @@ Thoughts, so that I don't forget them
 
       .cv-entry-list {
         padding: 0;
+      }
+
+      .point {
+        --point-size: var(--size-16) !important;
       }
     }
   }
