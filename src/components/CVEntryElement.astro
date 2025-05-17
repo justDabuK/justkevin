@@ -29,7 +29,7 @@ const timeSpanString = timeSpanInYears < 1 ? `${timeSpanInMonths} m` : `${timeSp
 ---
 
 <li>
-  <div class="list-point">
+  <div class="time-indicator">
     <span>{formatDate(entry.startDate)}</span>
     <div class="time-span">{timeSpanString}</div>
     <span>{formatDate(entry.endDate)}</span>
@@ -49,7 +49,7 @@ const timeSpanString = timeSpanInYears < 1 ? `${timeSpanInMonths} m` : `${timeSp
     align-items: center;
     gap: var(--size-16);
 
-    .list-point {
+    .time-indicator {
       height: 100%;
       display: flex;
       flex-direction: column;
