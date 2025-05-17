@@ -9,8 +9,8 @@ const cvEntries: CVEntry[] = [
   {
     company: "Wildmoser electronic",
     positions: ["Intern"],
-    startDate: Date.parse("01 Sep 2014 00:00:00 +01:00"),
-    endDate: Date.parse("01 Feb 2015 00:00:00 +01:00"),
+    startDate: Date.parse("01 Sep 2014 23:00:00 +01:00"),
+    endDate: Date.parse("01 Feb 2015 23:00:00 +01:00"),
     description:
       "My first real job in the industry. I learned designing PCBs and how to properly program microcontrollers. The project I worked on was a capacitive sensor board that had two applications. Rain recognition and finger detection. I was told that my prototypes were the basis for actual products that made its way into our customers products.",
       skills: [
@@ -25,8 +25,8 @@ const cvEntries: CVEntry[] = [
   {
     company: "Zentrale It der Hochschule München",
     positions: ["Student Worker"],
-    startDate: Date.parse("01 Jun 2015 00:00:00 +01:00"),
-    endDate: Date.parse("01 Apr 2016 00:00:00 +01:00"),
+    startDate: Date.parse("01 Jun 2015 23:00:00 +01:00"),
+    endDate: Date.parse("01 Apr 2016 23:00:00 +01:00"),
     description:
       'Here I worked while I was writing my bachelor thesis. Next to learning how to set up firewalls, which was necessary for my bachelor thesis, I learned a lot about the basics of computer networks and how the network of our university was setup. Since most servers we had were Linux servers I learned most of my command line skills during my time here.',
     skills: ["pfSense", "Linux", "Network Security", "PHP"],
@@ -34,8 +34,8 @@ const cvEntries: CVEntry[] = [
   {
     company: "Magazino GmbH",
     positions: ["Working Student"],
-    startDate: Date.parse("01 Mar 2016 00:00:00 +01:00"),
-    endDate: Date.parse("01 Oct 2016 00:00:00 +01:00"),
+    startDate: Date.parse("01 Mar 2016 23:00:00 +01:00"),
+    endDate: Date.parse("01 Oct 2016 23:00:00 +01:00"),
     description:
       "My first Job in robotics. Which was very exciting to me. I just finished my bachelor in electrical engineering, which is why I started in the electrical engineering department. My main topic was reverse engineering a tool we used for flashing our electrical motors. The tool was only available on windows, but most engineers used Linux. A bit of CAN Signal analysis and Python wizardry created a library that was apparently further used long after I was gone (source: friends of mine that worked here after me).",
     skills: ["Python", "C++", "CAN", "I2C", "Embedded Systems"],
@@ -43,8 +43,8 @@ const cvEntries: CVEntry[] = [
   {
     company: "Roboy (these days Robody)",
     positions: ["Lab Course", "Junior Angel", "Master Thesis"],
-    startDate: Date.parse("01 Oct 2017 00:00:00 +01:00"),
-    endDate: Date.parse("01 Sep 2019 00:00:00 +01:00"),
+    startDate: Date.parse("01 Oct 2017 23:00:00 +01:00"),
+    endDate: Date.parse("01 Sep 2019 23:00:00 +01:00"),
     description:
       "This project accompanied me for the most of my time during my master studies. It started with working on locating sounds sources, which later allowed the robot to look into the direction of the speaker closest to it. In between I had my first leadership experience by guiding some other students towards building a UI that made it easier to assign and execute tasks on the robot. It ended with my master thesis in which I used a generative algorithm, in order to optimize the placement of our muskoskeletal actuators for a hypothetic exoskeleton arm. The exoskeleton never made it into a real life prototype, but writing the simulation taught me a lot about C++, Python and Robotics itself.",
     skills: [
@@ -68,8 +68,8 @@ const cvEntries: CVEntry[] = [
       "Software Engineer",
       "Senior Software Engineer",
     ],
-    startDate: Date.parse("01 Mar 2017 00:00:00 +01:00"),
-    endDate: Date.parse("01 Aug 2022 00:00:00 +01:00"),
+    startDate: Date.parse("01 Mar 2017 23:00:00 +01:00"),
+    endDate: Date.parse("01 Aug 2022 23:00:00 +01:00"),
     description:
       "Here I spent so far my longest time in a single company. I started during my master studies and stayed for some more years after I finished my master. Here I learned the difference between a programmer/coder and a software engineer. While building Java backends I learned how to think about a solution and talk with someone about it before you start coding. I also had my first real frontend experience here. In that project I found my love for it and was so motivated that I later took over the project as its team lead. The company also allowed us to have side projects, which I used to learn how to animate in 3D with Three.js. It was a great time here and it was a hard decision to leave, but I wanted to get back into robotics and I wanted to further use my newly acquired frontend skills.",
     skills: [
@@ -95,7 +95,7 @@ const cvEntries: CVEntry[] = [
   {
     company: "Agile Robots SE",
     positions: ["Software Engineer", "Senior Software Engineer"],
-    startDate: Date.parse("01 Sep 2022 00:00:00 +01:00"),
+    startDate: Date.parse("01 Sep 2022 23:00:00 +01:00"),
     endDate: Date.now(),
     description:
       "After some years away from robots I finally found myself back in a robotics start up. I currently work here and I quite enjoy it. The product we build allows non robotics people to program robots with a visual programing language. My love for robotics and for frontend engineering really combine here. Additionally I was able to build up our Team, taking over interviews and even taking over as Team Lead while my colleague was on parental leave for 4 months. These days I am the technical frontend lead of our product and like to help my colleagues aligning their code with our architecture and teaching them CSS tricks and wizardry whenever possible.",
@@ -158,15 +158,6 @@ const skillLevelMap = {
     ,
   }
 }
-
-/*
-Thoughts, so that I don't forget them
-- date next to list point
-- descriptions should be written like a story instead of what they currently are
-- skills on the left highlight if they are in the list of "active" skills
-- when scrolling through, the current entry is a bit bigger and in the front, the other are a bit smaller and transparent (see adams list animations)
-- skills on the left have indicators that show how trained I am (three dots are probably enough)
-*/
 ---
 
 <BaseLayout title="CV">
@@ -291,7 +282,7 @@ Thoughts, so that I don't forget them
               gap: var(--size-4);
 
               .point {
-                --point-size: var(--size-8);
+                --point-size: var(--size-12);
 
                 width: var(--point-size);
                 height: var(--point-size);
@@ -331,10 +322,6 @@ Thoughts, so that I don't forget them
 
       .cv-entry-list {
         padding: 0;
-      }
-
-      .point {
-        --point-size: var(--size-12) !important;
       }
     }
   }
