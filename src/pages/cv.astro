@@ -119,6 +119,45 @@ const cvEntries: CVEntry[] = [
   },
 ];
 
+const skillLevelMap = {
+  "Frontend": {
+    color: "var(--rosewater)",
+    skillMap:
+        {
+          "Vue": 4,
+          "CSS": 4,
+          "Typescript": 4,
+          "Three.js": 4,
+          "GraphQL": 3,
+          "gRPC": 3,
+        }
+    ,
+  },
+    "Backend": {
+        color: "var(--green)",
+        skillMap:
+            {
+              "C": 3,
+              "C++": 3,
+              "Python": 4,
+              "Java": 2,
+            }
+        ,
+    },
+  "General": {
+    color: "var(--lavender)",
+    skillMap:
+        {
+          "Git": 4,
+          "Linux": 4,
+          "Leadership": 3,
+          "Hiring": 4,
+          "Feature Specification": 4,
+        }
+    ,
+  }
+}
+
 /*
 Thoughts, so that I don't forget them
 - date next to list point
@@ -142,8 +181,30 @@ Thoughts, so that I don't forget them
 
   <div class="cv-wrapper">
     <div class="cv-sidebar">
+      <h3>Skills</h3>
+        <ul>
+            {Object.entries(skillLevelMap).map(([category, { color, skillMap }]) => (
+            <li>
+                <h5>{category}</h5>
+                <ul class="skill-list">
+                {Object.entries(skillMap).map(([skill, level]) => (
+                    <li class="skill-level">
+                      <span>{skill}</span>
+                      <div class="skill-level-indicator" style={`--skill-color: ${color}`}>
+                          {Array.from({ length: 5 }, (_, i) => (
+                          <span
+                              class:list={["point", i < level ? "filled" : ""]}
+                          ></span>
+                          ))}
+                      </div>
+                    </li>
+                ))}
+                </ul>
+            </li>
+            ))}
+        </ul>
     </div>
-    <ul>
+    <ul class="cv-entry-list">
       {cvEntries.map((entry) => <CVEntryElement entry={entry} />)}
     </ul>
   </div>
@@ -154,6 +215,7 @@ Thoughts, so that I don't forget them
     display: flex;
     gap: var(--size-16);
     align-items: center;
+    width: 80%;
 
     img {
       object-fit: cover;
@@ -167,15 +229,66 @@ Thoughts, so that I don't forget them
   .cv-wrapper {
     display: grid;
     grid-template-columns: auto 1fr;
-    gap: var(--size-4);
+    gap: var(--size-48);
+    margin-top: var(--size-32);
+    width: 80%;
 
     .cv-sidebar {
       display: flex;
       flex-direction: column;
       gap: var(--size-4);
+      margin-top: var(--size-16);
+
+      h3 {
+        margin: 0 0 var(--size-16) 0;
+      }
+
+      ul {
+        margin: 0;
+        list-style: none;
+        padding: 0;
+        display: flex;
+        flex-direction: column;
+        gap: var(--size-24);
+
+        &.skill-list {
+            gap: var(--size-8);
+        }
+        li {
+          font-size: var(--font-size-20);
+
+          h5 {
+            font-size: var(--font-size-20);
+            margin: 0 0 var(--size-16) 0;
+          }
+
+          .skill-level {
+            display: flex;
+            align-items: center;
+            gap: var(--size-16);
+            justify-content: space-between;
+
+            .skill-level-indicator {
+              display: flex;
+              gap: var(--size-4);
+
+              .point {
+                width: var(--size-8);
+                height: var(--size-8);
+                border-radius: 100vw;
+                background-color: color-mix(in oklch, var(--skill-color), transparent 60%);
+
+                &.filled {
+                  background-color: var(--skill-color);
+                }
+              }
+            }
+          }
+        }
+      }
     }
 
-    ul {
+    .cv-entry-list {
       display: flex;
       flex-direction: column;
       gap: var(--size-24);
