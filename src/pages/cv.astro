@@ -172,11 +172,15 @@ Thoughts, so that I don't forget them
   <h1>Curriculum Vitae</h1>
   <div class="cv-header">
     <Image src={profilePicture} alt="Profile picture" />
-    <p>
-      I am a software developer from Munich, Germany with a diverse field of
-      expertise. I currently specialize in frontend development. My strong suit
-      are applications that process and visualize complex data, preferably in 3D.
-    </p>
+    <div class="summary">
+      <span class="quote">„</span>
+      <p>
+        I am a software developer from Munich, Germany with a diverse field of
+        expertise. I currently specialize in frontend development. My strong suit
+        are applications that process and visualize complex data, preferably in 3D.
+      </p>
+      <span class="quote">“</span>
+    </div>
   </div>
 
   <div class="cv-wrapper">
@@ -213,8 +217,8 @@ Thoughts, so that I don't forget them
 <style>
   .cv-header {
     display: flex;
-    gap: var(--size-16);
     align-items: center;
+    gap: var(--size-24);
     width: 80%;
 
     img {
@@ -223,6 +227,16 @@ Thoughts, so that I don't forget them
       height: var(--size-128);
       width: auto;
       border: var(--size-4) solid var(--subtext1);
+    }
+
+    .summary {
+      display: flex;
+      align-items: center;
+
+      .quote {
+        color: color-mix(in oklch, var(--text), transparent 70%);
+        font-size: var(--size-192);
+      }
     }
   }
 
