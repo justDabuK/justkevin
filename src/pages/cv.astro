@@ -170,8 +170,9 @@ Thoughts, so that I don't forget them
 
 <BaseLayout title="CV">
   <h1>Curriculum Vitae</h1>
-  <div class="cv-header">
-    <Image src={profilePicture} alt="Profile picture" />
+  <div class="cv-layout">
+    <Image class="profile-picture" src={profilePicture} alt="Profile picture" />
+
     <div class="summary">
       <span class="quote">„</span>
       <p>
@@ -181,9 +182,7 @@ Thoughts, so that I don't forget them
       </p>
       <span class="quote">“</span>
     </div>
-  </div>
 
-  <div class="cv-wrapper">
     <div class="cv-sidebar">
       <h3>Skills</h3>
         <ul>
@@ -208,6 +207,7 @@ Thoughts, so that I don't forget them
             ))}
         </ul>
     </div>
+
     <ul class="cv-entry-list">
       {cvEntries.map((entry) => <CVEntryElement entry={entry} />)}
     </ul>
@@ -215,21 +215,32 @@ Thoughts, so that I don't forget them
 </BaseLayout>
 
 <style>
-  .cv-header {
-    display: flex;
-    align-items: center;
-    gap: var(--size-24);
+  .cv-layout {
+    display: grid;
+    grid-template-areas:
+    "image summary"
+    "skills entries";
+    grid-template-columns: auto 1fr;
+    grid-template-rows: auto 1fr;
+    gap: var(--size-32);
     width: 80%;
+
+    .profile-picture {
+      grid-area: image;
+    }
 
     img {
       object-fit: cover;
       border-radius: 100vw;
-      height: var(--size-128);
+      height: 70%;
       width: auto;
       border: var(--size-4) solid var(--subtext1);
+      align-self: center;
+      justify-self: center;
     }
 
     .summary {
+      grid-area: summary;
       display: flex;
       align-items: center;
 
@@ -238,16 +249,9 @@ Thoughts, so that I don't forget them
         font-size: var(--size-192);
       }
     }
-  }
-
-  .cv-wrapper {
-    display: grid;
-    grid-template-columns: auto 1fr;
-    gap: var(--size-48);
-    margin-top: var(--size-32);
-    width: 80%;
 
     .cv-sidebar {
+      grid-area: skills;
       display: flex;
       flex-direction: column;
       gap: var(--size-4);
@@ -266,7 +270,7 @@ Thoughts, so that I don't forget them
         gap: var(--size-24);
 
         &.skill-list {
-            gap: var(--size-8);
+          gap: var(--size-8);
         }
         li {
           font-size: var(--font-size-20);
@@ -303,9 +307,12 @@ Thoughts, so that I don't forget them
     }
 
     .cv-entry-list {
+      grid-area: entries;
+      padding: 0 0 0 var(--size-16);
       display: flex;
       flex-direction: column;
       gap: var(--size-24);
     }
   }
+
 </style>
