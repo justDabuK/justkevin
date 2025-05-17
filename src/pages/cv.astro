@@ -309,9 +309,9 @@ Thoughts, so that I don't forget them
     .cv-entry-list {
       grid-area: entries;
       padding: 0 0 0 var(--size-16);
-      display: flex;
-      flex-direction: column;
-      gap: var(--size-24);
+      display: grid;
+      grid-template-columns: auto 1fr;
+      gap: var(--size-16);
     }
 
     @media (min-width: 1200px) {
@@ -322,8 +322,13 @@ Thoughts, so that I don't forget them
       display: flex;
       flex-direction: column;
       gap: var(--size-32);
+
       img {
         max-height: 50%;
+      }
+
+      .cv-entry-list {
+        padding: 0;
       }
     }
   }
