@@ -11,6 +11,16 @@ function formatDate(date: number) {
     month: "numeric",
   });
 }
+
+function joinEntries(positionList: string[]) {
+  const numberOfPositions = positionList.length;
+
+  if(numberOfPositions === 1) {
+    return positionList[0];
+  } else {
+    return `${positionList.slice(0, numberOfPositions - 1).join(", ")} & ${positionList[numberOfPositions - 1]}`
+  }
+}
 ---
 
 <li>
@@ -19,7 +29,7 @@ function formatDate(date: number) {
     <span>{formatDate(entry.startDate)} - {formatDate(entry.endDate)}</span>
   </div>
   <div class="content">
-    <h3>{entry.positions.join(", ")} at {entry.company}</h3>
+    <h3>{joinEntries(entry.positions)} at {entry.company}</h3>
     <p>{entry.description}</p>
     <p><strong>{entry.skills.join(", ")}</strong></p>
   </div>
