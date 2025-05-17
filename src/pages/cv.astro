@@ -131,14 +131,17 @@ Thoughts, so that I don't forget them
 
 <BaseLayout title="CV">
   <h1>Curriculum Vitae</h1>
-  <p>
-    I am a software developer from Munich, Germany with a diverse field of
-    expertise. I currently specialize in frontend development. My strong suit
-    are applications that process and visualize complex data, preferably in 3D.
-  </p>
+  <div class="cv-header">
+    <Image src={profilePicture} alt="Profile picture" />
+    <p>
+      I am a software developer from Munich, Germany with a diverse field of
+      expertise. I currently specialize in frontend development. My strong suit
+      are applications that process and visualize complex data, preferably in 3D.
+    </p>
+  </div>
+
   <div class="cv-wrapper">
     <div class="cv-sidebar">
-      <Image src={profilePicture} alt="Profile picture" />
     </div>
     <ul>
       {cvEntries.map((entry) => <CVEntryElement entry={entry} />)}
@@ -147,6 +150,21 @@ Thoughts, so that I don't forget them
 </BaseLayout>
 
 <style>
+
+  .cv-header {
+    display: flex;
+    gap: var(--size-16);
+    align-items: center;
+
+    img {
+      object-fit: cover;
+      border-radius: 100vw;
+      height: var(--size-128);
+      width: auto;
+      border: var(--size-4) solid var(--subtext1);
+    }
+  }
+
   .cv-wrapper {
     display: grid;
     grid-template-columns: auto 1fr;
@@ -156,14 +174,6 @@ Thoughts, so that I don't forget them
       display: flex;
       flex-direction: column;
       gap: var(--size-4);
-
-      img {
-        object-fit: cover;
-        border-radius: 100vw;
-        height: var(--size-128);
-        width: auto;
-        border: var(--size-4) solid var(--subtext1);
-      }
     }
 
     ul {
