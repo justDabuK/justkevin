@@ -7,6 +7,7 @@ type CVEntry = {
   startDate: number;
   endDate: number;
   description: string;
+  skills?: string[];
 };
 const cvEntries: CVEntry[] = [
   {
@@ -15,7 +16,12 @@ const cvEntries: CVEntry[] = [
     startDate: Date.parse("01 Sep 2014 00:00:00 +01:00"),
     endDate: Date.parse("01 Feb 2015 00:00:00 +01:00"),
     description:
-      "Hardware and Software prototype development of a capacitive Sensorboard, wich has the ability to indicate rain, and to identify closer coming objects, especialy human fingers.",
+      "My first real job in the industry. I learned designing PCBs and how to properly program microcontrollers. The project I worked on was a capacitive sensor board that had two applications. Rain recognition and finger detection. I was told that my prototypes were the basis for actual products that made its way into our customers products.",
+    skills: [
+      "C",
+      "PCB Design",
+      "Altium Designer",
+    ],
   },
   {
     company: "Zentrale It der Hochschule München",
