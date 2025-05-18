@@ -2,8 +2,9 @@
 import { CVEntry } from "../types/CVEntry";
 interface Props {
   entry: CVEntry;
+  timeSpanColor: string;
 }
-const { entry } = Astro.props;
+const { entry, timeSpanColor } = Astro.props;
 
 function formatDate(date: number) {
   return new Date(date).toLocaleDateString("en-US", {
@@ -29,7 +30,7 @@ const timeSpanString = timeSpanInYears < 1 ? `${timeSpanInMonths} m` : `${timeSp
 ---
 
 <li>
-  <div class="time-indicator">
+  <div class="time-indicator" style={`--time-span-color: ${timeSpanColor}`}>
     <span>{formatDate(entry.startDate)}</span>
     <div class="time-span">{timeSpanString}</div>
     <span>{formatDate(entry.endDate)}</span>
