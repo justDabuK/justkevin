@@ -1,0 +1,91 @@
+---
+import { CVEntry } from "../types/CVEntry";
+interface Props {
+  entry: CVEntry;
+  timeSpanColor: string;
+}
+const { entry, timeSpanColor } = Astro.props;
+
+function formatDate(date: number) {
+  return new Date(date).toLocaleDateString("en-US", {
+    year: "numeric",
+    month: "numeric",
+  });
+}
+
+function joinEntries(positionList: string[]) {
+  const numberOfPositions = positionList.length;
+
+  if(numberOfPositions === 1) {
+    return positionList[0];
+  } else {
+    return `${positionList.slice(0, numberOfPositions - 1).join(", ")} & ${positionList[numberOfPositions - 1]}`
+  }
+}
+
+const timeSpan = new Date(entry.endDate).getTime() - new Date(entry.startDate).getTime();
+const timeSpanInMonths = Math.floor(timeSpan / (1000 * 60 * 60 * 24 * 30));
+const timeSpanInYears = Math.floor(timeSpan / (1000 * 60 * 60 * 24 * 365));
+const timeSpanString = timeSpanInYears < 1 ? `${timeSpanInMonths} m` : `${timeSpanInYears} y`;
+---
+
+<li>
+  <div class="time-indicator" style={`--time-span-color: ${timeSpanColor}`}>
+    <span>{formatDate(entry.startDate)}</span>
+    <div class="time-span">{timeSpanString}</div>
+    <span>{formatDate(entry.endDate)}</span>
+  </div>
+  <div class="content">
+    <h3>{joinEntries(entry.positions)} at {entry.company}</h3>
+    <p>{entry.description}</p>
+    <p><strong>{entry.skills.join(", ")}</strong></p>
+  </div>
+</li>
+
+<style>
+  li {
+    --time-span-color: var(--sapphire);
+    list-style: none;
+    display: grid;
+    grid-template-columns: subgrid;
+    grid-column: span 2;
+    align-items: center;
+    gap: var(--size-16);
+
+    .time-indicator {
+      height: 100%;
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+      align-items: center;
+      gap: var(--size-8);
+      background-color: color-mix(in oklab, var(--time-span-color), transparent 90%);
+      border-radius: var(--size-4);
+      border: 2px solid var(--time-span-color);
+
+      .time-span {
+        flex: 1;
+        display: flex;
+        align-items: center;
+        font-weight: bold;
+        color: var(--time-span-color);
+      }
+
+      span {
+        font-size: var(--font-size-14);
+        color: var(--time-span-color);
+        padding: var(--size-8);
+      }
+    }
+
+    .content {
+      h3 {
+        margin: 0;
+      }
+
+      p {
+        margin-bottom: 0;
+      }
+    }
+  }
+</style>
