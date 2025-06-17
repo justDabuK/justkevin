@@ -6,8 +6,8 @@ interface Props {
 }
 const { entry, timeSpanColor } = Astro.props;
 
-function formatDate(date: number) {
-  return new Date(date).toLocaleDateString("en-US", {
+function formatDate(date: number | string) {
+  return typeof date === "string" ? date : new Date(date).toLocaleDateString("en-US", {
     year: "numeric",
     month: "numeric",
   });
@@ -22,8 +22,8 @@ function joinEntries(positionList: string[]) {
     return `${positionList.slice(0, numberOfPositions - 1).join(", ")} & ${positionList[numberOfPositions - 1]}`
   }
 }
-
-const timeSpan = new Date(entry.endDate).getTime() - new Date(entry.startDate).getTime();
+const endDate = typeof entry.endDate === "string" ? Date.now() : entry.endDate;
+const timeSpan = new Date(endDate).getTime() - new Date(entry.startDate).getTime();
 const timeSpanInMonths = Math.floor(timeSpan / (1000 * 60 * 60 * 24 * 30));
 const timeSpanInYears = Math.floor(timeSpan / (1000 * 60 * 60 * 24 * 365));
 const timeSpanString = timeSpanInYears < 1 ? `${timeSpanInMonths} m` : `${timeSpanInYears} y`;
