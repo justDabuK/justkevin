@@ -9,10 +9,10 @@
     "astro": "astro"
   },
   "dependencies": {
-    "@astrojs/rss": "^4.0.11",
-    "@fontsource/inclusive-sans": "^5.2.5",
-    "@fontsource/pacifico": "^5.2.5",
-    "astro": "^5.7.10",
+    "@astrojs/rss": "^4.0.12",
+    "@fontsource/inclusive-sans": "^5.2.6",
+    "@fontsource/pacifico": "^5.2.6",
+    "astro": "^5.9.4",
     "astro-icon": "^1.1.5",
     "sharp": "^0.33.5"
   },
