@@ -7,26 +7,30 @@ interface Props {
 const { entry, timeSpanColor } = Astro.props;
 
 function formatDate(date: number | string) {
-  return typeof date === "string" ? date : new Date(date).toLocaleDateString("en-US", {
-    year: "numeric",
-    month: "numeric",
-  });
+  return typeof date === "string"
+    ? date
+    : new Date(date).toLocaleDateString("en-US", {
+        year: "numeric",
+        month: "numeric",
+      });
 }
 
 function joinEntries(positionList: string[]) {
   const numberOfPositions = positionList.length;
 
-  if(numberOfPositions === 1) {
+  if (numberOfPositions === 1) {
     return positionList[0];
   } else {
-    return `${positionList.slice(0, numberOfPositions - 1).join(", ")} & ${positionList[numberOfPositions - 1]}`
+    return `${positionList.slice(0, numberOfPositions - 1).join(", ")} & ${positionList[numberOfPositions - 1]}`;
   }
 }
 const endDate = typeof entry.endDate === "string" ? Date.now() : entry.endDate;
-const timeSpan = new Date(endDate).getTime() - new Date(entry.startDate).getTime();
+const timeSpan =
+  new Date(endDate).getTime() - new Date(entry.startDate).getTime();
 const timeSpanInMonths = Math.floor(timeSpan / (1000 * 60 * 60 * 24 * 30));
 const timeSpanInYears = Math.floor(timeSpan / (1000 * 60 * 60 * 24 * 365));
-const timeSpanString = timeSpanInYears < 1 ? `${timeSpanInMonths} m` : `${timeSpanInYears} y`;
+const timeSpanString =
+  timeSpanInYears < 1 ? `${timeSpanInMonths} m` : `${timeSpanInYears} j`;
 ---
 
 <li>
@@ -36,8 +40,8 @@ const timeSpanString = timeSpanInYears < 1 ? `${timeSpanInMonths} m` : `${timeSp
     <span>{formatDate(entry.endDate)}</span>
   </div>
   <div class="content">
-    <h3>{joinEntries(entry.positions)} at {entry.company}</h3>
-    <p>{entry.description}</p>
+    <h3>{joinEntries(entry.positionen)} bei {entry.company}</h3>
+    <p>{entry.beschreibung}</p>
     <p><strong>{entry.skills.join(", ")}</strong></p>
   </div>
 </li>
@@ -59,7 +63,11 @@ const timeSpanString = timeSpanInYears < 1 ? `${timeSpanInMonths} m` : `${timeSp
       justify-content: center;
       align-items: center;
       gap: var(--size-8);
-      background-color: color-mix(in oklab, var(--time-span-color), transparent 90%);
+      background-color: color-mix(
+        in oklab,
+        var(--time-span-color),
+        transparent 90%
+      );
       border-radius: var(--size-4);
       border: 2px solid var(--time-span-color);
 
