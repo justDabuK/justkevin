@@ -13,14 +13,14 @@ const cvEntries: CVEntry[] = [
     endDate: Date.parse("01 Feb 2015 23:00:00 +01:00"),
     description:
       "My first real job in the industry. I learned designing PCBs and how to properly program microcontrollers. The project I worked on was a capacitive sensor board that had two applications. Rain recognition and finger detection. I was told that my prototypes were the basis for actual products that made its way into our customers products.",
-      skills: [
-          "C",
-          "Circuit design",
-          "PCB design",
-          "Altium",
-          "MPLAB",
-          "Embedded Systems",
-      ],
+    skills: [
+      "C",
+      "Circuit design",
+      "PCB design",
+      "Altium",
+      "MPLAB",
+      "Embedded Systems",
+    ],
   },
   {
     company: "Zentrale It der Hochschule München",
@@ -28,7 +28,7 @@ const cvEntries: CVEntry[] = [
     startDate: Date.parse("01 Jun 2015 23:00:00 +01:00"),
     endDate: Date.parse("01 Apr 2016 23:00:00 +01:00"),
     description:
-      'Here I worked while I was writing my bachelor thesis. Next to learning how to set up firewalls, which was necessary for my bachelor thesis, I learned a lot about the basics of computer networks and how the network of our university was setup. Since most servers we had were Linux servers I learned most of my command line skills during my time here.',
+      "Here I worked while I was writing my bachelor thesis. Next to learning how to set up firewalls, which was necessary for my bachelor thesis, I learned a lot about the basics of computer networks and how the network of our university was setup. Since most servers we had were Linux servers I learned most of my command line skills during my time here.",
     skills: ["pfSense", "Linux", "Network Security", "PHP"],
   },
   {
@@ -126,7 +126,7 @@ const educationEntries: CVEntry[] = [
     startDate: Date.parse("01 Oct 2012 23:00:00 +01:00"),
     endDate: Date.parse("01 Apr 2016 23:00:00 +01:00"),
     description: "Electrical Engineering, focus on technical computer science",
-    skills: []
+    skills: [],
   },
   {
     company: "Technische Universität München",
@@ -134,49 +134,43 @@ const educationEntries: CVEntry[] = [
     startDate: Date.parse("01 Oct 2016 23:00:00 +01:00"),
     endDate: Date.parse("01 Sep 2019 23:00:00 +01:00"),
     description: "Robotics, Cognition, Intelligence",
-    skills: []
-  }
-]
+    skills: [],
+  },
+];
 
 const skillLevelMap = {
-  "Frontend": {
+  Frontend: {
     color: "var(--rosewater)",
-    skillMap:
-        {
-          "Vue": 4,
-          "Astro": 4,
-          "CSS": 4,
-          "Typescript": 4,
-          "Three.js": 4,
-          "GraphQL": 3,
-          "gRPC": 3,
-        }
-    ,
-  },
-    "Backend": {
-        color: "var(--green)",
-        skillMap:
-            {
-              "C": 2,
-              "C++": 2,
-              "Python": 3,
-              "Java": 2,
-            }
-        ,
+    skillMap: {
+      Vue: 4,
+      Astro: 4,
+      CSS: 4,
+      Typescript: 4,
+      "Three.js": 4,
+      GraphQL: 3,
+      gRPC: 3,
     },
-  "General": {
+  },
+  Backend: {
+    color: "var(--green)",
+    skillMap: {
+      C: 2,
+      "C++": 2,
+      Python: 3,
+      Java: 2,
+    },
+  },
+  General: {
     color: "var(--lavender)",
-    skillMap:
-        {
-          "Git": 4,
-          "Linux": 4,
-          "Leadership": 3,
-          "Hiring": 4,
-          "Feature Specification": 4,
-        }
-    ,
-  }
-}
+    skillMap: {
+      Git: 4,
+      Linux: 4,
+      Leadership: 3,
+      Hiring: 4,
+      "Feature Specification": 4,
+    },
+  },
+};
 ---
 
 <BaseLayout title="CV">
@@ -188,48 +182,63 @@ const skillLevelMap = {
       <span class="quote">„</span>
       <p>
         I am a software developer from Munich, Germany with a diverse field of
-        expertise. I currently specialize in frontend development. My strong suit
-        is applications that process and visualize complex data, preferably in 3D.
+        expertise. I currently specialize in frontend development. My strong
+        suit is applications that process and visualize complex data, preferably
+        in 3D.
       </p>
       <span class="quote">“</span>
     </div>
 
     <div class="cv-sidebar">
       <h2>Skills</h2>
-        <ul>
-            {Object.entries(skillLevelMap).map(([category, { color, skillMap }]) => (
-            <li>
+      <ul>
+        {
+          Object.entries(skillLevelMap).map(
+            ([category, { color, skillMap }]) => (
+              <li>
                 <h5>{category}</h5>
                 <ul class="skill-list">
-                {Object.entries(skillMap).map(([skill, level]) => (
+                  {Object.entries(skillMap).map(([skill, level]) => (
                     <li class="skill-level">
                       <span>{skill}</span>
-                      <div class="skill-level-indicator" style={`--skill-color: ${color}`}>
-                          {Array.from({ length: 5 }, (_, i) => (
+                      <div
+                        class="skill-level-indicator"
+                        style={`--skill-color: ${color}`}
+                      >
+                        {Array.from({ length: 5 }, (_, i) => (
                           <span
-                              class:list={["point", i < level ? "filled" : ""]}
-                          ></span>
-                          ))}
+                            class:list={["point", i < level ? "filled" : ""]}
+                          />
+                        ))}
                       </div>
                     </li>
-                ))}
+                  ))}
                 </ul>
-            </li>
-            ))}
-        </ul>
+              </li>
+            ),
+          )
+        }
+      </ul>
     </div>
 
     <div class="cv-content">
       <h2>Experience</h2>
       <ul class="entry-list">
-        {cvEntries.map((entry) => <CVEntryElement entry={entry} timeSpanColor="var(--sapphire)" />)}
+        {
+          cvEntries.map((entry) => (
+            <CVEntryElement entry={entry} timeSpanColor="var(--sapphire)" />
+          ))
+        }
       </ul>
       <h2>Education</h2>
       <ul class="entry-list">
-        {educationEntries.map((entry) => <CVEntryElement entry={entry} timeSpanColor="var(--green)" />)}
+        {
+          educationEntries.map((entry) => (
+            <CVEntryElement entry={entry} timeSpanColor="var(--green)" />
+          ))
+        }
       </ul>
     </div>
-
   </div>
 </BaseLayout>
 
@@ -237,8 +246,8 @@ const skillLevelMap = {
   .cv-layout {
     display: grid;
     grid-template-areas:
-    "image summary"
-    "skills entries";
+      "image summary"
+      "skills entries";
     grid-template-columns: auto 1fr;
     grid-template-rows: auto 1fr;
     gap: var(--size-32);
@@ -313,7 +322,11 @@ const skillLevelMap = {
                 width: var(--point-size);
                 height: var(--point-size);
                 border-radius: 100vw;
-                background-color: color-mix(in oklch, var(--skill-color), transparent 60%);
+                background-color: color-mix(
+                  in oklch,
+                  var(--skill-color),
+                  transparent 60%
+                );
 
                 &.filled {
                   background-color: var(--skill-color);
@@ -358,5 +371,4 @@ const skillLevelMap = {
       }
     }
   }
-
 </style>
