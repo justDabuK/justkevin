@@ -1,9 +1,9 @@
 ---
-import BaseLayout from "../layouts/BaseLayout.astro";
 import { Image } from "astro:assets";
 import profilePicture from "../assets/profile-pictures/KevinJust_18-01-183-web.jpg";
 import { type CVEntry } from "../types/CVEntry";
-import CVEntryElement from "../components/CVEntryElement.astro";
+import PrintLayout from "../layouts/PrintLayout.astro";
+import PrintCVEntryElement from "../components/PrintCVEntryElement.astro";
 
 const cvEntries: CVEntry[] = [
   {
@@ -96,7 +96,7 @@ const cvEntries: CVEntry[] = [
     company: "Agile Robots SE",
     positions: ["Softwareingenieur", "Senior Softwareingenieur"],
     startDate: Date.parse("01 Sep 2022 23:00:00 +01:00"),
-    endDate: "today",
+    endDate: "heute",
     description:
       "Nach ein paar Jahren weg von Robotern bin ich endlich wieder in einem Robotik Start Up gelandet. Ich arbeite hier zurzeit und es gefällt mir sehr gut. Das Produkt das wir bauen erlaubt es Nicht-Robotik Leuten, Roboter mit einer visuellen Programmiersprache zu programmieren. Meine Liebe für Robotik und Frontend Engineering vereinen sich hier. Zusätzlich konnte ich unser Team aufbauen, indem ich Interviews geführt habe und sogar Team Lead wurde während mein Kollege 4 Monate in Elternzeit war. Zurzeit bin ich der technische Frontend Lead unseres Produktes und helfe meinen Kollegen dabei ihren Code an unsere Architektur anzupassen und ihnen CSS Tricks und Zauberei beizubringen wann immer es möglich ist.",
     skills: [
@@ -174,8 +174,8 @@ const skillLevelMap = {
 };
 ---
 
-<BaseLayout title="CV">
-  <h1>Lebenslauf</h1>
+<PrintLayout title="CV">
+  <h1>Kevin Just</h1>
   <div class="cv-layout">
     <Image class="profile-picture" src={profilePicture} alt="Profile picture" />
 
@@ -226,30 +226,22 @@ const skillLevelMap = {
       <h2>Erfahrung</h2>
       <ul class="entry-list">
         {
-          cvEntries.map((entry) => (
-            <CVEntryElement
-              entry={entry}
-              timeSpanColor="var(--sapphire)"
-              isGerman
-            />
+          cvEntries.reverse().map((entry, index) => (
+            <PrintCVEntryElement entry={entry} timeSpanColor="var(--sapphire)" isGerman index={index} />
           ))
         }
       </ul>
       <h2>Ausbildung</h2>
       <ul class="entry-list">
         {
-          educationEntries.map((entry) => (
-            <CVEntryElement
-              entry={entry}
-              timeSpanColor="var(--green)"
-              isGerman
-            />
+          educationEntries.reverse().map((entry, index) => (
+            <PrintCVEntryElement entry={entry} timeSpanColor="var(--green)" isGerman index={index} />
           ))
         }
       </ul>
     </div>
   </div>
-</BaseLayout>
+</PrintLayout>
 
 <style>
   .cv-layout {
@@ -259,7 +251,8 @@ const skillLevelMap = {
       "skills entries";
     grid-template-columns: auto 1fr;
     grid-template-rows: auto 1fr;
-    gap: var(--size-32);
+    gap: var(--size-16);
+    font-size: 1rem;
 
     .profile-picture {
       grid-area: image;
@@ -268,7 +261,7 @@ const skillLevelMap = {
     img {
       object-fit: cover;
       border-radius: 100vw;
-      max-height: 70%;
+      max-height: 60%;
       width: auto;
       border: var(--size-4) solid var(--subtext1);
       align-self: center;
@@ -294,6 +287,7 @@ const skillLevelMap = {
 
       h2 {
         margin: 0 0 var(--size-16) 0;
+        font-size: 1.5rem;
       }
 
       ul {
@@ -308,10 +302,8 @@ const skillLevelMap = {
           gap: var(--size-8);
         }
         li {
-          font-size: var(--font-size-20);
-
           h5 {
-            font-size: var(--font-size-20);
+            font-size: 1.2rem;
             margin: 0 0 var(--size-16) 0;
           }
 
@@ -326,7 +318,7 @@ const skillLevelMap = {
               gap: var(--size-4);
 
               .point {
-                --point-size: var(--size-12);
+                --point-size: var(--size-8);
 
                 width: var(--point-size);
                 height: var(--point-size);
@@ -352,32 +344,19 @@ const skillLevelMap = {
 
       h2 {
         margin: 0 0 var(--size-16) 0;
+        font-size: 1.5rem;
       }
 
       .entry-list {
-        padding: 0 0 0 var(--size-16);
-        display: grid;
-        grid-template-columns: auto 1fr;
-        gap: var(--size-24);
+      padding: 0 0 0 var(--size-16);
+      display: grid;
+      grid-template-columns: auto 1fr;
+      gap: var(--size-24);
       }
     }
 
     @media (min-width: 1200px) {
       width: 80%;
-    }
-
-    @media (max-width: 900px) {
-      display: flex;
-      flex-direction: column;
-      gap: var(--size-32);
-
-      img {
-        max-height: 50%;
-      }
-
-      .cv-entry-list {
-        padding: 0;
-      }
     }
   }
 </style>

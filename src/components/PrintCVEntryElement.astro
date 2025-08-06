@@ -36,7 +36,7 @@ const timeSpanString =
     ? `${timeSpanInMonths} m`
     : `${timeSpanInYears} ${isGerman ? "j" : "y"}`;
 
-const optionalClass = index === 2 ? "extra-space" : "";
+const optionalClass = index === 2 ? (isGerman ? 'extra-extra-space' : "extra-space") : "";
 ---
 
 <li class={optionalClass}>
@@ -65,6 +65,10 @@ const optionalClass = index === 2 ? "extra-space" : "";
     &.extra-space {
       margin-top: 2rem;
     }
+
+      &.extra-extra-space {
+          margin-top: 2.25rem;
+      }
 
     .time-indicator {
       height: 100%;

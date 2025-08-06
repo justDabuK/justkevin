@@ -1,9 +1,7 @@
 ---
-import BaseLayout from "../layouts/BaseLayout.astro";
 import { Image } from "astro:assets";
 import profilePicture from "../assets/profile-pictures/KevinJust_18-01-183-web.jpg";
 import { type CVEntry } from "../types/CVEntry";
-import CVEntryElement from "../components/CVEntryElement.astro";
 import PrintLayout from "../layouts/PrintLayout.astro";
 import PrintCVEntryElement from "../components/PrintCVEntryElement.astro";
 
@@ -303,8 +301,6 @@ const skillLevelMap = {
           gap: var(--size-8);
         }
         li {
-          //font-size: var(--font-size-20);
-
           h5 {
             font-size: 1.2rem;
             margin: 0 0 var(--size-16) 0;
