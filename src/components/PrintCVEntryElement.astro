@@ -4,8 +4,9 @@ interface Props {
   entry: CVEntry;
   timeSpanColor: string;
   isGerman?: boolean;
+  index: number
 }
-const { entry, timeSpanColor, isGerman = false } = Astro.props;
+const { entry, timeSpanColor, isGerman = false, index } = Astro.props;
 
 function formatDate(date: number | string) {
   return typeof date === "string"
@@ -34,9 +35,11 @@ const timeSpanString =
   timeSpanInYears < 1
     ? `${timeSpanInMonths} m`
     : `${timeSpanInYears} ${isGerman ? "j" : "y"}`;
+
+const optionalClass = index === 2 ? (isGerman ? 'extra-extra-space' : "extra-space") : "";
 ---
 
-<li>
+<li class={optionalClass}>
   <div class="time-indicator" style={`--time-span-color: ${timeSpanColor}`}>
     <span>{formatDate(entry.startDate)}</span>
     <div class="time-span">{timeSpanString}</div>
@@ -59,10 +62,18 @@ const timeSpanString =
     align-items: center;
     gap: var(--size-16);
 
+    &.extra-space {
+      margin-top: 2rem;
+    }
+
+    &.extra-extra-space {
+        margin-top: 2.25rem;
+    }
+
     .time-indicator {
       height: 100%;
       display: flex;
-      flex-direction: column;
+      flex-direction: column-reverse;
       justify-content: center;
       align-items: center;
       gap: var(--size-8);
@@ -83,7 +94,7 @@ const timeSpanString =
       }
 
       span {
-        font-size: var(--font-size-14);
+        font-size: 0.8rem;
         color: var(--time-span-color);
         padding: var(--size-8);
       }
@@ -92,6 +103,7 @@ const timeSpanString =
     .content {
       h3 {
         margin: 0;
+        font-size: 1.2rem;
       }
 
       p {

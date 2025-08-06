@@ -1,9 +1,9 @@
 ---
-import BaseLayout from "../layouts/BaseLayout.astro";
 import { Image } from "astro:assets";
 import profilePicture from "../assets/profile-pictures/KevinJust_18-01-183-web.jpg";
 import { type CVEntry } from "../types/CVEntry";
-import CVEntryElement from "../components/CVEntryElement.astro";
+import PrintLayout from "../layouts/PrintLayout.astro";
+import PrintCVEntryElement from "../components/PrintCVEntryElement.astro";
 
 const cvEntries: CVEntry[] = [
   {
@@ -173,8 +173,8 @@ const skillLevelMap = {
 };
 ---
 
-<BaseLayout title="CV">
-  <h1>Curriculum Vitae</h1>
+<PrintLayout title="CV">
+  <h1>Kevin Just</h1>
   <div class="cv-layout">
     <Image class="profile-picture" src={profilePicture} alt="Profile picture" />
 
@@ -225,22 +225,22 @@ const skillLevelMap = {
       <h2>Experience</h2>
       <ul class="entry-list">
         {
-          cvEntries.map((entry) => (
-            <CVEntryElement entry={entry} timeSpanColor="var(--sapphire)" />
+          cvEntries.reverse().map((entry, index) => (
+            <PrintCVEntryElement entry={entry} timeSpanColor="var(--sapphire)" index={index} />
           ))
         }
       </ul>
       <h2>Education</h2>
       <ul class="entry-list">
         {
-          educationEntries.map((entry) => (
-            <CVEntryElement entry={entry} timeSpanColor="var(--green)" />
+          educationEntries.reverse().map((entry, index) => (
+            <PrintCVEntryElement entry={entry} timeSpanColor="var(--green)" index={index} />
           ))
         }
       </ul>
     </div>
   </div>
-</BaseLayout>
+</PrintLayout>
 
 <style>
   .cv-layout {
@@ -250,7 +250,8 @@ const skillLevelMap = {
       "skills entries";
     grid-template-columns: auto 1fr;
     grid-template-rows: auto 1fr;
-    gap: var(--size-32);
+    gap: var(--size-16);
+    font-size: 1rem;
 
     .profile-picture {
       grid-area: image;
@@ -285,6 +286,7 @@ const skillLevelMap = {
 
       h2 {
         margin: 0 0 var(--size-16) 0;
+        font-size: 1.5rem;
       }
 
       ul {
@@ -299,10 +301,8 @@ const skillLevelMap = {
           gap: var(--size-8);
         }
         li {
-          font-size: var(--font-size-20);
-
           h5 {
-            font-size: var(--font-size-20);
+            font-size: 1.2rem;
             margin: 0 0 var(--size-16) 0;
           }
 
@@ -317,7 +317,7 @@ const skillLevelMap = {
               gap: var(--size-4);
 
               .point {
-                --point-size: var(--size-12);
+                --point-size: var(--size-8);
 
                 width: var(--point-size);
                 height: var(--point-size);
@@ -343,32 +343,19 @@ const skillLevelMap = {
 
       h2 {
         margin: 0 0 var(--size-16) 0;
+        font-size: 1.5rem;
       }
 
       .entry-list {
-        padding: 0 0 0 var(--size-16);
-        display: grid;
-        grid-template-columns: auto 1fr;
-        gap: var(--size-24);
+      padding: 0 0 0 var(--size-16);
+      display: grid;
+      grid-template-columns: auto 1fr;
+      gap: var(--size-24);
       }
     }
 
     @media (min-width: 1200px) {
       width: 80%;
-    }
-
-    @media (max-width: 900px) {
-      display: flex;
-      flex-direction: column;
-      gap: var(--size-32);
-
-      img {
-        max-height: 50%;
-      }
-
-      .cv-entry-list {
-        padding: 0;
-      }
     }
   }
 </style>

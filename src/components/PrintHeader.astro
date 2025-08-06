@@ -1,0 +1,76 @@
+---
+import ThemeSelection from "./ThemeSelection/ThemeSelection.astro";
+import { Icon } from "astro-icon/components";
+---
+
+<div>
+    <a href="https://github.com/justDabuK"><Icon name="github" /><span>@justDabuK</span></a>
+    <a href="https://justkevin.dev"><Icon name="web" /><span>justkevin.dev</span></a>
+    <a href="mailto:kevinjust87@gmail.com"><Icon name="email" /><span>kevinjust87@gmail.com</span></a>
+    <a href="https://www.linkedin.com/in/kevin-just-b1660712b/"><Icon name="linkedin" /><span>kevin-just-b1660712b</span></a>
+</div>
+
+<style>
+  a {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 0.2rem;
+
+    span {
+      font-size: 1rem;
+    }
+  }
+
+  [data-icon] {
+    font-size: 2rem;
+    color: var(--text-color);
+    transition: color 0.2s ease-in-out;
+
+    &:hover {
+      color: var(--teal);
+    }
+  }
+
+  div {
+    display: flex;
+    gap: var(--size-8);
+    align-items: center;
+    justify-content: space-between;
+    margin: 2rem;
+
+    nav {
+      flex: 1;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+
+      [data-icon] {
+        font-size: var(--size-96);
+        color: var(--text-color);
+      }
+
+      .home-button {
+        display: flex;
+        align-items: center;
+        gap: var(--size-8);
+      }
+
+      ul {
+        list-style: none;
+        display: flex;
+        gap: var(--size-8);
+      }
+    }
+
+    [data-icon] {
+      font-size: var(--font-size-30);
+      color: var(--text-color);
+        transition: color 0.2s ease-in-out;
+
+        &:hover {
+            color: var(--teal);
+        }
+    }
+  }
+</style>

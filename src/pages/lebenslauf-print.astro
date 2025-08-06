@@ -1,18 +1,18 @@
 ---
-import BaseLayout from "../layouts/BaseLayout.astro";
 import { Image } from "astro:assets";
 import profilePicture from "../assets/profile-pictures/KevinJust_18-01-183-web.jpg";
 import { type CVEntry } from "../types/CVEntry";
-import CVEntryElement from "../components/CVEntryElement.astro";
+import PrintLayout from "../layouts/PrintLayout.astro";
+import PrintCVEntryElement from "../components/PrintCVEntryElement.astro";
 
 const cvEntries: CVEntry[] = [
   {
     company: "Wildmoser electronic",
-    positions: ["Intern"],
+    positions: ["Praktikant"],
     startDate: Date.parse("01 Sep 2014 23:00:00 +01:00"),
     endDate: Date.parse("01 Feb 2015 23:00:00 +01:00"),
     description:
-      "My first real job in the industry. I learned designing PCBs and how to properly program microcontrollers. The project I worked on was a capacitive sensor board that had two applications. Rain recognition and finger detection. I was told that my prototypes were the basis for actual products that made its way into our customers products.",
+      "Mein erster richtiger Job in der Wirtschaft. Ich hab gelernt wie man Platinen designed und microcontroller programmiert. Das Project an dem ich gearbeitet habe war ein kapazitives sensor board das 2 Applikationen hatte, Regen und Finger Erkennung. Mir wurde erzählt das meine Prototypen die Basis für die Lösung waren, die es später in die Produkte unserer Kunden geschafft hat.",
     skills: [
       "C",
       "Circuit design",
@@ -24,29 +24,29 @@ const cvEntries: CVEntry[] = [
   },
   {
     company: "Zentrale It der Hochschule München",
-    positions: ["Student Worker"],
+    positions: ["Werkstudent"],
     startDate: Date.parse("01 Jun 2015 23:00:00 +01:00"),
     endDate: Date.parse("01 Apr 2016 23:00:00 +01:00"),
     description:
-      "Here I worked while I was writing my bachelor thesis. Next to learning how to set up firewalls, which was necessary for my bachelor thesis, I learned a lot about the basics of computer networks and how the network of our university was setup. Since most servers we had were Linux servers I learned most of my command line skills during my time here.",
+      "Hier hab ich gearbeitet während ich an meiner Bachelorarbeit gearbeitet habe. Neben dem Wissen wie man Firewalls aufsetzt, was notwendig für meine Bachelorarbeit war, hab ich auch viel über Computer Netzwerke und das Netzwerk der Hochschule selbst gelernt. Da die meisten Server Linux Server waren, hab ich meine meisten Kommandozeilen Skills hier gelernt.",
     skills: ["pfSense", "Linux", "Network Security", "PHP"],
   },
   {
     company: "Magazino GmbH",
-    positions: ["Working Student"],
+    positions: ["Werkstudent"],
     startDate: Date.parse("01 Mar 2016 23:00:00 +01:00"),
     endDate: Date.parse("01 Oct 2016 23:00:00 +01:00"),
     description:
-      "My first Job in robotics. Which was very exciting to me. I just finished my bachelor in electrical engineering, which is why I started in the electrical engineering department. My main topic was reverse engineering a tool we used for flashing our electrical motors. The tool was only available on windows, but most engineers used Linux. A bit of CAN Signal analysis and Python wizardry created a library that was apparently further used long after I was gone (source: friends of mine that worked here after me).",
+      "Mein erster Job in der Robotik, was vor allem damals sehr afregend für mich war. Ich hatte gerade erst meinen Bachelor in Elektrotechnik abgeschlossen, weshalb ich in der Elektrorechnik-Abteilung angefnagen hab. Mein Haupttheme war das reverse engineeren eines Programms, das wir zum flashen der Elektromotoren verwendet haben. Das Program gab es nämlich nur für Windows, allerdings hatten die meisten Ingeneure einen Linux-Rechner. CAN-Bus Signal Analyse und ein Python Zauberei haben eine Library kreiert die anscheinend noch lange nachdem ich die Firma verlassen habe genutzt wurde (Quelle: Freunde von mit die nach mir hier gearbeitet haben).",
     skills: ["Python", "C++", "CAN", "I2C", "Embedded Systems"],
   },
   {
-    company: "Roboy (these days Robody)",
-    positions: ["Lab Course", "Junior Angel", "Master Thesis"],
+    company: "Roboy (heutzutage Robody)",
+    positions: ["Laborkurs", "Junior Angel", "Masterarbeit"],
     startDate: Date.parse("01 Oct 2017 23:00:00 +01:00"),
     endDate: Date.parse("01 Sep 2019 23:00:00 +01:00"),
     description:
-      "This project accompanied me for the most of my time during my master studies. It started with working on locating sounds sources, which later allowed the robot to look into the direction of the speaker closest to it. In between I had my first leadership experience by guiding some other students towards building a UI that made it easier to assign and execute tasks on the robot. It ended with my master thesis in which I used a generative algorithm, in order to optimize the placement of our muskoskeletal actuators for a hypothetic exoskeleton arm. The exoskeleton never made it into a real life prototype, but writing the simulation taught me a lot about C++, Python and Robotics itself.",
+      "Dieses projekt hat mich die meiste Zeit meines Masterstudiums begleitet. Es begann mit der Arbeit an der Lokalisierung von Schallquellen, wodurch der Roboter später in der Lage war in die Richtung des nähersten Sprechers zu schauen. Zwischendurch hatte ich meine erste Führungserfahrung, indem ich andere Studenten angeleitet habe eine UI zu bauen, die es einfacher machte Aufgaben für den Roboter auszuwählen und auszuführen. Es endete mit meiner Masterarbeit in der ich einen generativen Algorithmus verwendet habe, um die Platzierung unserer muskoskelettalen Aktuatoren für einen simulierten Exoskelett Arm zu optimieren. Das Exoskelett hat es nie in einen echten Prototypen geschafft, aber das Schreiben der Simulation hat mir viel über C++, Python und Robotik beigebracht.",
     skills: [
       "FPGA",
       "Verilog",
@@ -64,14 +64,14 @@ const cvEntries: CVEntry[] = [
   {
     company: "QAware GmbH",
     positions: [
-      "Working Student Softwaredevelopment",
-      "Software Engineer",
-      "Senior Software Engineer",
+      "Werkstudent Softwaredevelopment",
+      "Softwareingenieur",
+      "Senior Softwareingenieur",
     ],
     startDate: Date.parse("01 Mar 2017 23:00:00 +01:00"),
     endDate: Date.parse("01 Aug 2022 23:00:00 +01:00"),
     description:
-      "Here I spent so far my longest time in a single company. I started during my master studies and stayed for some more years after I finished my master. Here I learned the difference between a programmer/coder and a software engineer. While building Java backends I learned how to think about a solution and talk with someone about it before you start coding. I also had my first real frontend experience here. In that project I found my love for it and was so motivated that I later took over the project as its team lead. The company also allowed us to have side projects, which I used to learn how to animate in 3D with Three.js. It was a great time here and it was a hard decision to leave, but I wanted to get back into robotics and I wanted to further use my newly acquired frontend skills.",
+      "Das ist die Firma bei der ich bisher die meiste Zeit verbracht hab. Ich habe während meines Masterstudiums angefangen und bin noch ein paar Jahre nach dem Abschluss geblieben. Hier hab ich den Unterschied zwischen einem Programmierer und einem Software Ingenieur gelernt. Während ich Java Backends gebaut habe, hab ich gelernt wie man über Lösungen nachdenkt und mit jemandem darüber redet, bevor man anfängt sie zu implementieren. Ich hatte auch meine erste richtige Frontend Erfahrung hier. In dem Projekt hab ich meine Liebe dafür entdeckt und war so motiviert, dass ich das Projekt später als Team Lead übernommen habe. Die Firma hat uns auch erlaubt Nebenprojekte zu haben, was ich genutzt habe um 3D Animation mit Three.js zu lernen. Ich hatte eine schöne Zeit hier und es war eine keine leichte Entscheidung zu gehen, aber ich wollte zurück in die Robotik und ich wollte meinen neuen Frontend Skills weiter ausbauen.",
     skills: [
       "Java",
       "Springboot",
@@ -94,11 +94,11 @@ const cvEntries: CVEntry[] = [
   },
   {
     company: "Agile Robots SE",
-    positions: ["Software Engineer", "Senior Software Engineer"],
+    positions: ["Softwareingenieur", "Senior Softwareingenieur"],
     startDate: Date.parse("01 Sep 2022 23:00:00 +01:00"),
-    endDate: "today",
+    endDate: "heute",
     description:
-      "After some years away from robots I finally found myself back in a robotics start up. I currently work here and I quite enjoy it. The product we build allows non robotics people to program robots with a visual programing language. My love for robotics and for frontend engineering really combine here. Additionally I was able to build up our Team, taking over interviews and even taking over as Team Lead while my colleague was on parental leave for 4 months. These days I am the technical frontend lead of our product and like to help my colleagues aligning their code with our architecture and teaching them CSS tricks and wizardry whenever possible.",
+      "Nach ein paar Jahren weg von Robotern bin ich endlich wieder in einem Robotik Start Up gelandet. Ich arbeite hier zurzeit und es gefällt mir sehr gut. Das Produkt das wir bauen erlaubt es Nicht-Robotik Leuten, Roboter mit einer visuellen Programmiersprache zu programmieren. Meine Liebe für Robotik und Frontend Engineering vereinen sich hier. Zusätzlich konnte ich unser Team aufbauen, indem ich Interviews geführt habe und sogar Team Lead wurde während mein Kollege 4 Monate in Elternzeit war. Zurzeit bin ich der technische Frontend Lead unseres Produktes und helfe meinen Kollegen dabei ihren Code an unsere Architektur anzupassen und ihnen CSS Tricks und Zauberei beizubringen wann immer es möglich ist.",
     skills: [
       "Vue",
       "Typescript",
@@ -125,7 +125,8 @@ const educationEntries: CVEntry[] = [
     positions: ["Bachelor of Engineering"],
     startDate: Date.parse("01 Oct 2012 23:00:00 +01:00"),
     endDate: Date.parse("01 Apr 2016 23:00:00 +01:00"),
-    description: "Electrical Engineering, focus on technical computer science",
+    description:
+      "Elektro- und Informationstechnik, Schwerpunkt Technische Informatik",
     skills: [],
   },
   {
@@ -160,7 +161,7 @@ const skillLevelMap = {
       Java: 2,
     },
   },
-  General: {
+  Generell: {
     color: "var(--lavender)",
     skillMap: {
       Git: 4,
@@ -173,18 +174,18 @@ const skillLevelMap = {
 };
 ---
 
-<BaseLayout title="CV">
-  <h1>Curriculum Vitae</h1>
+<PrintLayout title="CV">
+  <h1>Kevin Just</h1>
   <div class="cv-layout">
     <Image class="profile-picture" src={profilePicture} alt="Profile picture" />
 
     <div class="summary">
       <span class="quote">„</span>
       <p>
-        I am a software developer from Munich, Germany with a diverse field of
-        expertise. I currently specialize in frontend development. My strong
-        suit is applications that process and visualize complex data, preferably
-        in 3D.
+        Ich bin ein Softwareentwickler aus München mit einem breiten Feld an
+        Expertiese. Ich bin derzeitig auf Frontend Entwicklung spezialisiert.
+        Meine Stärke ist die Entwicklung von Anwendungen, die komplexe Daten
+        verarbeiten und visualisieren, vorzugsweise in 3D.
       </p>
       <span class="quote">“</span>
     </div>
@@ -222,25 +223,25 @@ const skillLevelMap = {
     </div>
 
     <div class="cv-content">
-      <h2>Experience</h2>
+      <h2>Erfahrung</h2>
       <ul class="entry-list">
         {
-          cvEntries.map((entry) => (
-            <CVEntryElement entry={entry} timeSpanColor="var(--sapphire)" />
+          cvEntries.reverse().map((entry, index) => (
+            <PrintCVEntryElement entry={entry} timeSpanColor="var(--sapphire)" isGerman index={index} />
           ))
         }
       </ul>
-      <h2>Education</h2>
+      <h2>Ausbildung</h2>
       <ul class="entry-list">
         {
-          educationEntries.map((entry) => (
-            <CVEntryElement entry={entry} timeSpanColor="var(--green)" />
+          educationEntries.reverse().map((entry, index) => (
+            <PrintCVEntryElement entry={entry} timeSpanColor="var(--green)" isGerman index={index} />
           ))
         }
       </ul>
     </div>
   </div>
-</BaseLayout>
+</PrintLayout>
 
 <style>
   .cv-layout {
@@ -250,7 +251,8 @@ const skillLevelMap = {
       "skills entries";
     grid-template-columns: auto 1fr;
     grid-template-rows: auto 1fr;
-    gap: var(--size-32);
+    gap: var(--size-16);
+    font-size: 1rem;
 
     .profile-picture {
       grid-area: image;
@@ -259,7 +261,7 @@ const skillLevelMap = {
     img {
       object-fit: cover;
       border-radius: 100vw;
-      max-height: 70%;
+      max-height: 60%;
       width: auto;
       border: var(--size-4) solid var(--subtext1);
       align-self: center;
@@ -285,6 +287,7 @@ const skillLevelMap = {
 
       h2 {
         margin: 0 0 var(--size-16) 0;
+        font-size: 1.5rem;
       }
 
       ul {
@@ -299,10 +302,8 @@ const skillLevelMap = {
           gap: var(--size-8);
         }
         li {
-          font-size: var(--font-size-20);
-
           h5 {
-            font-size: var(--font-size-20);
+            font-size: 1.2rem;
             margin: 0 0 var(--size-16) 0;
           }
 
@@ -317,7 +318,7 @@ const skillLevelMap = {
               gap: var(--size-4);
 
               .point {
-                --point-size: var(--size-12);
+                --point-size: var(--size-8);
 
                 width: var(--point-size);
                 height: var(--point-size);
@@ -343,32 +344,19 @@ const skillLevelMap = {
 
       h2 {
         margin: 0 0 var(--size-16) 0;
+        font-size: 1.5rem;
       }
 
       .entry-list {
-        padding: 0 0 0 var(--size-16);
-        display: grid;
-        grid-template-columns: auto 1fr;
-        gap: var(--size-24);
+      padding: 0 0 0 var(--size-16);
+      display: grid;
+      grid-template-columns: auto 1fr;
+      gap: var(--size-24);
       }
     }
 
     @media (min-width: 1200px) {
       width: 80%;
-    }
-
-    @media (max-width: 900px) {
-      display: flex;
-      flex-direction: column;
-      gap: var(--size-32);
-
-      img {
-        max-height: 50%;
-      }
-
-      .cv-entry-list {
-        padding: 0;
-      }
     }
   }
 </style>
