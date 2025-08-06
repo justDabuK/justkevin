@@ -1,10 +1,11 @@
 ---
-import { CVEntry } from "../types/CVEntry";
+import { type CVEntry } from "../types/CVEntry";
 interface Props {
   entry: CVEntry;
   timeSpanColor: string;
+  isGerman?: boolean;
 }
-const { entry, timeSpanColor } = Astro.props;
+const { entry, timeSpanColor, isGerman = false } = Astro.props;
 
 function formatDate(date: number | string) {
   return typeof date === "string"
@@ -30,7 +31,9 @@ const timeSpan =
 const timeSpanInMonths = Math.floor(timeSpan / (1000 * 60 * 60 * 24 * 30));
 const timeSpanInYears = Math.floor(timeSpan / (1000 * 60 * 60 * 24 * 365));
 const timeSpanString =
-  timeSpanInYears < 1 ? `${timeSpanInMonths} m` : `${timeSpanInYears} j`;
+  timeSpanInYears < 1
+    ? `${timeSpanInMonths} m`
+    : `${timeSpanInYears} ${isGerman ? "j" : "y"}`;
 ---
 
 <li>
@@ -40,8 +43,8 @@ const timeSpanString =
     <span>{formatDate(entry.endDate)}</span>
   </div>
   <div class="content">
-    <h3>{joinEntries(entry.positionen)} bei {entry.company}</h3>
-    <p>{entry.beschreibung}</p>
+    <h3>{joinEntries(entry.positions)} bei {entry.company}</h3>
+    <p>{entry.description}</p>
     <p><strong>{entry.skills.join(", ")}</strong></p>
   </div>
 </li>
