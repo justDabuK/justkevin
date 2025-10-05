@@ -1,0 +1,40 @@
+---
+import { Image } from "astro:assets";
+
+interface Props {
+  src: ImageMetadata;
+  alt: string;
+  caption?: string;
+  width?: number;
+  height?: number;
+  isImageRight?: boolean;
+}
+
+const { src, alt, caption, width, height, isImageRight } = Astro.props;
+---
+
+<figure class:list={[isImageRight ? "image-right" : ""]}>
+  <Image src={src} alt={alt} width={width} height={height} loading="lazy" />
+  {caption && <figcaption>{caption}</figcaption>}
+</figure>
+
+<style>
+  figure {
+    display: flex;
+    justify-content: space-between;
+    gap: var(--size-8);
+    margin: var(--size-16) 0;
+
+    &.image-right {
+      flex-direction: row-reverse;
+    }
+
+    img {
+      max-width: 25%;
+    }
+
+    figcaption {
+      align-self: center;
+    }
+  }
+</style>

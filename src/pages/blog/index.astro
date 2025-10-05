@@ -1,6 +1,6 @@
 ---
 import BaseLayout from "../../layouts/BaseLayout.astro";
-const subpages = await Astro.glob("./*.md");
+const subpages = await Astro.glob("./*.md*");
 subpages.sort(
   (a, b) => new Date(a.frontmatter.date) - new Date(b.frontmatter.date),
 );
