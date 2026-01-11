@@ -1,0 +1,43 @@
+---
+layout: "@layouts/DefaultLayout.astro"
+title: "Goodbye, Google Drive #DIDit"
+date: "2025-09-18"
+---
+
+# Goodbye, Google Drive #DIDit
+
+The day is Sunday the 04 of January, the first [digital independence day](https://di.day).The protagonist, me. His gear, a [raspberry pi 5](https://www.berrybase.de/raspberry-pi-5-8gb-ram), an [SSD Hat](https://www.berrybase.de/pcie-m.2-hat-fuer-raspberry-pi-5-m-key-compact) and a [SSD](https://www.berrybase.de/raspberry-pi-ssd-1tb). His mission, breaking free of the Tech-Broligarchy shackles. The plan, set up a Nextcloud so he doesn't need to use Google Drive anymore.
+
+Our hero starts with looking at the Pi he once planned to use as a camera, but due to lack of focus and a high tendency to not finish projects he started, he never finished it. The camera module is still attached and the SD card, a gray 32 GB one, is still running a [camera server](https://github.com/signag/raspi-cam-srv), he got from GitHub, on boot. He heard rumors of the possibility to even install the [Raspbian OS directly on the SSD](https://forums.raspberrypi.com/viewtopic.php?t=358900), rendering the SD card, that is prone to fatigue, unnecessary.
+
+He ventures forth and his first battle is a challenging one. The "old" raspbian on the SD card does not recognize the SSD, he installs the newest rasbpian on the SD card, the new version recognizes the SSD, he installs the newest raspbian on the SSD, he looks up how to install nextcloud, [docker is discontinued](https://github.com/nextcloud/nextcloudpi?tab=readme-ov-file#docker-has-been-discontinued), [he checks a video on how to install it manually](https://www.youtube.com/watch?v=H-L8CPE-k7g), but after just 2 steps it fails. Close to defeat he has flash of genius, the community around [NextCloudPi](https://nextcloudpi.com/) already created an [image he can directly install](https://github.com/nextcloud/nextcloudpi/releases/tag/v1.56.0)(the [NextcloudPi_RaspberryPi.4+\_v1.56.0.zip](https://github.com/nextcloud/nextcloudpi/releases/download/v1.56.0/NextcloudPi_RaspberryPi.4+_v1.56.0.zip) one), he downloads it, he boots from the SD card once more, he installs the NextCloudPi image on the SSD, he boots from the SSD,
+
+<ul style="list-style-type: none; ">
+  <li>he waits for the raspberry pi LEDs to blink...</li>
+  <li>he pings the raspberry pi to make sure it is available...</li>
+  <li>he opens the ip address in a browser...</li>
+  <li>
+    THERE IT IS, the nextcloudpi website as shown in all the nextcloud on
+    raspberry pi youtube videos.
+  </li>
+</ul>
+
+He quickly notes down the password and the default user name, presses "Activate"
+to enter the from now one default mode and after a reload there it is, the
+NextCloudPi Login page. The first user-password combination allows access, but
+the only thing he'll do is changing the password, the NextCloud will stay in his
+local network, no need to configure anything else. There is a button that leads
+to the NextCloud, there he uses the second user-password combination, and he sees
+it, in all its glory, the default NextCloud interface. Oh, it is beautiful. The
+blues, the whites, the blacks, links to "Documents" (currently empty), links to
+"Photos" (does this mean he might be able to get rid of Google Photos as well 🤔),
+links to "Calender" (whaaaaat, maybe even no more google calender 🫨). He
+succeeded. The NextCloud is up and running.
+
+In the aftermath our hero creates a second non-admin account to use on all his devices and an account for his trusty side-kick Lilia, as she shall also be granted access to the beauty that beholds their own "cloud".
+
+The cloud is already filled with Dungeons & Dragons documents that, in the "before times", were manually synced and downloaded and redownloaded between all his devices. Now, all the DnD Documents just live in the NextClouds "Document" folder, structured and easily available on all devices, no kickstarter redownload or [ecosia](https://www.ecosia.org/) searches necessary anymore.
+
+Will our hero also succeed in getting rid of Google Photos. Will Lilia manage to use the cloud as her new home to all her countless photos, tune in to the next episode of
+
+# #DIDit
