@@ -1,6 +1,15 @@
 ---
 import BaseLayout from "../../layouts/BaseLayout.astro";
-const subpages = await Astro.glob("./*.md*");
+import type { MarkdownInstance } from "astro";
+
+interface Frontmatter {
+  title: string;
+  date: string;
+}
+
+const subpages = Object.values(
+  import.meta.glob<MarkdownInstance<Frontmatter>>("./*.md*", { eager: true }),
+);
 subpages.sort(
   (a, b) => new Date(a.frontmatter.date) - new Date(b.frontmatter.date),
 );
