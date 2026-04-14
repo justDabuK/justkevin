@@ -14,4 +14,4 @@ This quite resonated with me. The comparison of "owning" a device with having a 
 
 ### [Wind Waker in Three.js](https://wind-waker-threejs.com/)
 
-Someone rebuild parts of Zelda: Wind Waker in Three.js so you can play it in the browser. Oh boy did I immediatly get caught up and reminded of the time when me and my brother played it on our GameCube.
+Someone rebuild parts of Zelda: Wind Waker in Three.js so you can play it in the browser. Oh boy did I immediatly get caught up and reminded of the time when me and my brother played it on our GameCube. The developer is unfortunately writing on his [GitHub page](https://github.com/Robpayot/tslda) that he is using AI tools to do it, which I guess is a nice way of saying it's vibe coded 😕 But that doesn't make it less fun to play around with 😄
