@@ -20,6 +20,15 @@ Someone rebuild parts of Zelda: Wind Waker in Three.js so you can play it in the
 
 A colleague of mine sent me this as an old colleague of his made this. If you don't know Outer Wilds, then you really missed out on something. Go to you favorite game store right now, buy it and be gone for the weekend. For everyone that did play this little masterpiece. Click on the link and enjoy the nostalgia while looking at the planets and listening to their songs.
 
+### [My first shared lemmy post](https://vger.to/lemmy.blahaj.zone/post/41762999)
+
+It has finally happened. I use lemmy (a reddit alternative) so much now that this month I finally had the urge to share something from there. I am unfortunately not sure yet what the best way of sharing from lemmy is, as simillar to Mastodon, there is no single websites, but you can look at lemmy posts from any lemmy instance 😅
+If the above link didn't wrok for you, here are a few more, so see which one works for you 🤷‍♂️
+
+- [Blahaj "Lemmy UI" link](https://lem.lemmy.blahaj.zone/post/41762999)
+- [Blahaj "Alexendrite UI" link](https://alx.lemmy.blahaj.zone/lemmy.blahaj.zone/post/41762999)
+- [Blahaj "mlmym UI" link](https://mlmym.lemmy.blahaj.zone/post/41762999)
+
 ## Games
 
 ### [The Outer Worlds 2](https://store.steampowered.com/app/1449110/The_Outer_Worlds_2/)
