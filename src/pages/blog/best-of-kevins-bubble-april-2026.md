@@ -29,6 +29,10 @@ If the above link didn't wrok for you, here are a few more, so see which one wor
 - [Blahaj "Alexendrite UI" link](https://alx.lemmy.blahaj.zone/lemmy.blahaj.zone/post/41762999)
 - [Blahaj "mlmym UI" link](https://mlmym.lemmy.blahaj.zone/post/41762999)
 
+### [Code is clay](https://frontendmasters.com/blog/code-is-clay/)
+
+I found this quite inspirational, and thought you'd might like it as well 😊
+
 ## Games
 
 ### [The Outer Worlds 2](https://store.steampowered.com/app/1449110/The_Outer_Worlds_2/)
