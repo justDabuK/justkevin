@@ -6,6 +6,8 @@ date: "2026-05-01"
 
 # Best of Kevin's bubble - April 2026
 
+Happy labor day everybody. Or happy whatever day you are reading this, who knows when you click on the link😅 Just like last month I want to present to you the gems of my bubble. Enjoy 😊
+
 ## Links
 
 ### [The Last quiet thing](https://www.terrygodier.com/the-last-quiet-thing)
@@ -22,8 +24,8 @@ A colleague of mine sent me this as an old colleague of his made this. If you do
 
 ### [My first shared lemmy post](https://vger.to/lemmy.blahaj.zone/post/41762999)
 
-It has finally happened. I use lemmy (a reddit alternative) so much now that this month I finally had the urge to share something from there. I am unfortunately not sure yet what the best way of sharing from lemmy is, as simillar to Mastodon, there is no single websites, but you can look at lemmy posts from any lemmy instance 😅
-If the above link didn't wrok for you, here are a few more, so see which one works for you 🤷‍♂️
+It has finally happened. I use lemmy (a Reddit alternative) so much now that this month I finally had the urge to share something from there. I am unfortunately not sure yet what the best way of sharing from lemmy is, as similar to Mastodon, there is no single websites, but you can look at lemmy posts from any lemmy instance 😅
+If the above link didn't work for you, here are a few more, so see which one works for you 🤷‍♂️
 
 - [Blahaj "Lemmy UI" link](https://lem.lemmy.blahaj.zone/post/41762999)
 - [Blahaj "Alexendrite UI" link](https://alx.lemmy.blahaj.zone/lemmy.blahaj.zone/post/41762999)
@@ -37,4 +39,14 @@ I found this quite inspirational, and thought you'd might like it as well 😊
 
 ### [The Outer Worlds 2](https://store.steampowered.com/app/1449110/The_Outer_Worlds_2/)
 
-During this month the outer worlds 2 was on sale for 40%, and that was excuse enough for me to finally buy it 😬. And oh boy was it a good investment. They took the theme from the first part and just dialed it up to 11. I especially like that this time it is not just about "hyper capitalism", but also about "hyper communism", or authocracy/monarchy, well the thing they have in North-Korea, China and in the old Soviet Union, where instead of everyone being equal, there is the one rich family leading everyone and the rest needs to fall in line and do their duties. It is especially interesting since the topics they so far covered were specifically about "you need to do good for society by playing your part" versus "you are responsible for yourself so make the best of it". Somehow like "individualism" vs "collectivism". It is interesting to see communism from that angle, that on the one handside society has your back, but on the other hand you need to do what "the system" told you to do. And if the system says you are a toilet cleaner, then you are one, independent of how good you would be as a musician, and engineer, a doctor or whatever. I always like to think of communism being the better option to what we currently have, but I never thought of that angle. It kinda makes me wonder what better option than our current capitalistic world we then actually have. Social captialism like we allegidely had in Germany after WW2? It makes me wonder what Socialism actually means? Or how we can get back to more social democracy, espicially with a government like we currently have. Well let's see where that thought brings me further, and until then I'll just further enjoy the outer worlds.
+During this month the outer worlds 2 was on sale for 40%, and that was excuse enough for me to finally buy it 😬. And oh boy was it a good investment. They took the theme from the first part and just dialed it up to 11. I especially like that this time it is not just about "hyper capitalism", but also about "hyper communism", or autocracy/monarchy, well the thing they have in North-Korea, China and in the old Soviet Union, where instead of everyone being equal, there is the one rich family leading everyone and the rest needs to fall in line and do their duties. It is especially interesting since the topics they so far covered were specifically about "you need to do good for society by playing your part" versus "you are responsible for yourself so make the best of it". Somehow like "individualism" vs "collectivism". It is interesting to see communism from that angle, that on the one handside society has your back, but on the other hand you need to do what "the system" told you to do. And if the system says you are a toilet cleaner, then you are one, independent of how good you would be as a musician, an engineer, a doctor or whatever. I always like to think of communism being the better option to what we currently have, but I never thought of that angle. It kinda makes me wonder what better option than our current capitalistic world we then actually have. Social captialism like we allegidely had in Germany after WW2? It makes me wonder what Socialism actually means? Or how we can get back to a more social democracy, espicially with a government like we currently have. Well let's see where that thought brings me further, and until then I'll just further enjoy the outer worlds.
+
+## Books
+
+### [The Finder's Stone trilogy - Kate Novak & Jeff Grubb](https://forgottenrealms.fandom.com/wiki/The_Finder%27s_Stone_trilogy)
+
+This month I finished [The Wyvern's Spur](https://forgottenrealms.fandom.com/wiki/The_Wyvern%27s_Spur) and [Song of the Saurials](https://forgottenrealms.fandom.com/wiki/Song_of_the_Saurials) and with this the finder's stone trilogy. Boy was I surprised, these books were released from 1988 to 1991, which is almost 40 years ago. Still I loved the characters, I loved the plot, I especially loved the worldbuilding. I can only recommend them, especially to DnD players and those who are interested in DnD stories.
+
+And that's it for this month. I hope you enjoyed it and see you next time,
+
+Kevin
