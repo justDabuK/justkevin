@@ -1,0 +1,66 @@
+---
+import BaseLayout from "../layouts/BaseLayout.astro";
+
+const readBooksOverview = (await (
+  await fetch("https://wyrms.de/user/justkevin/books/read.json")
+).json()) as { first: string; last: string };
+const firstRequestUrl = readBooksOverview.first.replace("?", ".json?");
+const equalsIndex = firstRequestUrl.indexOf("=");
+const requestUrl = firstRequestUrl.slice(0, equalsIndex + 1);
+const numberOfPages = parseInt(readBooksOverview.last.split("=")[1]);
+interface Book {
+  id: string;
+  title: string;
+  subtitle: string;
+  description: string;
+  cover: {
+    type: string;
+    url: string;
+    name: string;
+  };
+}
+
+const listOfBooks: Book[] = [];
+
+for (let pageIndex = 0; pageIndex < numberOfPages; pageIndex++) {
+  const response = (await (
+    await fetch(requestUrl.concat((pageIndex + 1).toString()))
+  ).json()) as {
+    orderedItems: Book[];
+  };
+  listOfBooks.push(...response.orderedItems);
+}
+---
+
+<BaseLayout title="Books I read">
+  <h1>Books I read</h1>
+  <ul>
+    {
+      listOfBooks.map((book) => (
+        <li>
+          <a href={book.id}>
+            <img src={book.cover.url} alt={book.cover.name} />
+          </a>
+        </li>
+      ))
+    }
+  </ul>
+</BaseLayout>
+
+<style>
+  ul {
+    list-style-type: none;
+    margin: 0;
+    padding: 0;
+
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+    gap: var(--size-8);
+
+    li {
+      display: flex;
+      justify-content: center;
+      align-items: center;
+    }
+  }
+</style>
