@@ -1,0 +1,89 @@
+---
+// Fetches book reviews from a StoryGraph/BookWyrm-style RSS feed at *build time*
+// and renders the ones published within a [start, end] date range.
+//
+// Feed item shape:
+//   <title>Review of "Book" (N stars): Review headline</title>
+//   <description>HTML-encoded review body (or literally "None" when no text)</description>
+//   <pubDate>RFC-822 date</pubDate>
+//   <link>permalink to the review</link>
+
+interface Props {
+  /** Inclusive start of the range. Date or any string `new Date()` accepts (e.g. "2026-06-01"). */
+  start: string | Date;
+  /** Inclusive end of the range. A date-only string covers the whole day. */
+  end: string | Date;
+  /** Override the feed URL if needed. */
+  feedUrl?: string;
+}
+
+const {
+  start,
+  end,
+  feedUrl = "https://wyrms.de/user/justkevin/rss-reviews",
+} = Astro.props;
+
+const startDate = new Date(start);
+const endDate = new Date(end);
+// Make the range inclusive of the whole end day when no explicit time was given.
+endDate.setHours(23, 59, 59, 999);
+
+type Review = {
+  title: string;
+  descriptionHtml: string;
+  pubDate: Date;
+  link: string;
+};
+
+function decodeEntities(value: string): string {
+  return value
+    .replace(/&lt;/g, "<")
+    .replace(/&gt;/g, ">")
+    .replace(/&quot;/g, '"')
+    .replace(/&#39;/g, "'")
+    .replace(/&amp;/g, "&"); // keep last so the others aren't re-decoded
+}
+
+function tag(block: string, name: string): string {
+  const match = block.match(new RegExp(`<${name}>([\\s\\S]*?)</${name}>`));
+  return match ? decodeEntities(match[1].trim()) : "";
+}
+
+let reviews: Review[] = [];
+
+try {
+  const response = await fetch(feedUrl);
+  if (!response.ok) throw new Error(`HTTP ${response.status}`);
+  const xml = await response.text();
+
+  reviews = (xml.match(/<item>[\s\S]*?<\/item>/g) ?? [])
+    .map((item) => ({
+      title: tag(item, "title"),
+      descriptionHtml: tag(item, "description"),
+      pubDate: new Date(tag(item, "pubDate")),
+      link: tag(item, "link"),
+    }))
+    .filter(
+      (review) =>
+        review.pubDate >= startDate &&
+        review.pubDate <= endDate &&
+        // Skip ratings with no written review.
+        review.descriptionHtml.trim() !== "None",
+    )
+    .sort((a, b) => a.pubDate.getTime() - b.pubDate.getTime());
+} catch (error) {
+  // Don't fail the whole build if the feed is unreachable — just log and render nothing.
+  console.error(`[BookReviews] Could not load feed ${feedUrl}:`, error);
+}
+---
+
+{
+  reviews.map((review) => (
+    <article class="book-review">
+      <h3>
+        <a href={review.link}>{review.title}</a>
+      </h3>
+      <div set:html={review.descriptionHtml} />
+    </article>
+  ))
+}
