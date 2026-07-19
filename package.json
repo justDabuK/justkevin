@@ -9,23 +9,17 @@
     "astro": "astro"
   },
   "dependencies": {
-    "@astrojs/mdx": "^7.0.0",
-    "@astrojs/rss": "^4.0.18",
+    "@astrojs/mdx": "^7.0.3",
+    "@astrojs/rss": "^4.0.19",
     "@fontsource/inclusive-sans": "^5.2.8",
     "@fontsource/pacifico": "^5.2.7",
-    "astro": "^7.0.3",
+    "astro": "^7.1.1",
     "astro-icon": "^1.1.5",
     "sharp": "^0.33.5"
   },
-  "packageManager": "pnpm@11.1.2+sha512.415a1cc25974731e75455c1468371be74c5aa5fb7621b50d4056d222451609f11412f23fd602e6169f1e060466641f798597e1be961a10688836a67b16569499",
+  "packageManager": "pnpm@11.15.0+sha512.266f8957a30d2be6e9468e5e66bcdedd35a794175f71b067ba8504d686cce1d0c0f429b33c323c3c569ad4891e667574a49ff71d1b89a22cc66f13c65818c578",
   "devDependencies": {
     "prettier": "3.5.2",
     "prettier-plugin-astro": "^0.14.1"
-  },
-  "pnpm": {
-    "onlyBuiltDependencies": [
-      "esbuild",
-      "sharp"
-    ]
   }
 }
