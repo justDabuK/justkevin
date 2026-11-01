@@ -2,6 +2,8 @@
 layout: "@layouts/DefaultLayout.astro"
 title: "Habit Tracker - The beginning"
 date: "2025-03-07"
+description: "Tracking my habits with something I wrote myself: planning a habit tracker with Nuxt and Supabase."
+image: "@assets/habbit-tracker/habbit-tracker-planing.jpg"
 ---
 
 # Habit Tracker - The beginning

@@ -2,6 +2,7 @@
 layout: "@layouts/DefaultLayout.astro"
 title: "First entry"
 date: "2024-12-28"
+description: "The blog is here and the blog is now. A place for me to write and a motivation to keep up my tinkering."
 ---
 
 # First entry

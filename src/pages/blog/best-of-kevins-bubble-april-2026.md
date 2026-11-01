@@ -2,6 +2,7 @@
 layout: "@layouts/DefaultLayout.astro"
 title: "Best of Kevin's bubble - April 2026"
 date: "2026-05-01"
+description: "Happy labor day! Just like last month, here are the gems of my bubble from April 2026."
 ---
 
 # Best of Kevin's bubble - April 2026

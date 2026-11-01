@@ -2,6 +2,8 @@
 layout: "@layouts/DefaultLayout.astro"
 title: "Best of Kevin's bubble - May 2026"
 date: "2026-06-01"
+description: "DakhaBrakha, Artemis II and more gems I found in my feed in May 2026."
+image: "@assets/best-of-kevins-bubble/just_a_rock.jpg"
 ---
 
 # Best of Kevin's bubble - May 2026

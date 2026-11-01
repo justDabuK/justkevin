@@ -2,6 +2,8 @@
 layout: "@layouts/DefaultLayout.astro"
 title: "Weight tracker"
 date: "2025-03-23"
+description: "Everything any client actually wants is Excel: how my habit tracker turned into a Google Sheets weight tracker."
+image: "@assets/habbit-tracker/weight-tracker-google-sheet.png"
 ---
 
 # Weight Tracker

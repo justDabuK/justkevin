@@ -4,12 +4,20 @@ import BaseLayout from "./BaseLayout.astro";
 type Props = {
   frontmatter: {
     title: string;
+    description?: string;
+    image?: string;
+    date?: string;
   };
 };
 
 const { frontmatter } = Astro.props;
 ---
 
-<BaseLayout title={frontmatter.title}>
+<BaseLayout
+  title={frontmatter.title}
+  description={frontmatter.description}
+  image={frontmatter.image}
+  date={frontmatter.date}
+>
   <slot />
 </BaseLayout>

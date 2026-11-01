@@ -2,6 +2,8 @@
 layout: "@layouts/DefaultLayout.astro"
 title: "Orrery - Servo Testing"
 date: "2025-03-30"
+description: "Building my own orrery, a planetary clock, starts with testing which servos can move the planets."
+image: "@assets/orrery/9g-continuous-rotation-micro-servo.jpg"
 ---
 
 # Orrery - Servo Testing

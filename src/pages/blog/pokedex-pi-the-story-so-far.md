@@ -2,6 +2,8 @@
 layout: "@layouts/DefaultLayout.astro"
 title: "PokedexPi - The story so far"
 date: "2025-01-09"
+description: "A Raspberry Pi 5, a HyperPixel square display, a camera module and big dreams: building a real-life Pokédex."
+image: "@assets/pokedexpi/PI_5_HERO_768x768_crop_center.webp"
 ---
 
 # PokedexPi - The story so far

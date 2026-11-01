@@ -28,9 +28,11 @@ Every blog post needs this frontmatter:
 layout: "@layouts/DefaultLayout.astro"
 title: "..."
 date: "YYYY-MM-DD"
+description: "One or two sentences for link previews"
+image: "@assets/<post-slug>/first-image.jpg" # optional, first image used in the post
 ---
 ```
-The `layout` field is what wraps markdown in the site chrome; `title` and `date` drive the index/RSS. Use `.mdx` when a post needs components (e.g. `ImageWithCaption` with imported image assets).
+`description` and `image` feed the Open Graph / link-preview tags in `BaseLayout` (`image` is resolved from `src/assets` and converted to jpg at build; without it the logo `public/og-default.png` is used). The `layout` field is what wraps markdown in the site chrome; `title` and `date` drive the index/RSS. Use `.mdx` when a post needs components (e.g. `ImageWithCaption` with imported image assets).
 
 ### Layouts
 - `BaseLayout.astro` — the real layout: `<head>`, `Header`, and a large `<style is:global>` block defining all design tokens.
