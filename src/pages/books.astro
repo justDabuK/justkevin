@@ -30,6 +30,40 @@ for (let pageIndex = 0; pageIndex < numberOfPages; pageIndex++) {
   };
   listOfBooks.push(...response.orderedItems);
 }
+
+// Reviews live in the ActivityPub outbox (as "Article"), linked to the book via inReplyToBook.
+// Rating-only entries without text are not in there.
+interface Review {
+  id: string;
+  type: string;
+  name: string;
+  content: string;
+  rating: number;
+  inReplyToBook: string;
+}
+
+const activityPub = { headers: { Accept: "application/activity+json" } };
+const outboxUrl = "https://wyrms.de/user/justkevin/outbox";
+const outbox = (await (await fetch(outboxUrl, activityPub)).json()) as {
+  last: string;
+};
+const numberOfOutboxPages = parseInt(outbox.last.split("=")[1]);
+const reviewsByBook = new Map<string, Review>();
+
+for (let page = 1; page <= numberOfOutboxPages; page++) {
+  const response = (await (
+    await fetch(`${outboxUrl}?page=${page}`, activityPub)
+  ).json()) as { orderedItems: Review[] };
+  for (const item of response.orderedItems) {
+    if (item.type === "Article") reviewsByBook.set(item.inReplyToBook, item);
+  }
+}
+
+// 'Review of "Book" (4.5 stars): Headline' -> 'Headline'
+const headline = (review: Review) =>
+  review.name.split(" stars): ").slice(1).join(" stars): ") || review.name;
+const stars = (rating: number) =>
+  "★".repeat(Math.floor(rating)) + (rating % 1 ? "½" : "");
 ---
 
 <BaseLayout title="Books I read">
@@ -37,19 +71,42 @@ for (let pageIndex = 0; pageIndex < numberOfPages; pageIndex++) {
   <p>
     This is basically a mirror of my "read books" data from <a
       href="https://wyrms.de">wyrms</a
-    >. For now, clicking on the images will bring you to the page of the book on <a
-      href="https://wyrms.de">wyrms.de</a
-    >. Maybe I'll manage to include my reviews of the books soon here as well.
+    >. Hover over a cover to see what I thought of it, clicking it brings you to
+    my review (or the book itself) on <a href="https://wyrms.de">wyrms.de</a>.
   </p>
   <ul>
     {
-      listOfBooks.map((book) => (
-        <li>
-          <a href={book.id}>
-            <img src={book.cover.url} alt={book.cover.name} />
-          </a>
-        </li>
-      ))
+      listOfBooks.map((book) => {
+        const review = reviewsByBook.get(book.id);
+        return (
+          <li>
+            <a href={review?.id ?? book.id}>
+              <img src={book.cover.url} alt={book.cover.name} />
+            </a>
+            <div class="card-backdrop" />
+            {review && (
+              <div
+                class="card-stars"
+                role="img"
+                aria-label={`${review.rating} of 5 stars`}
+              >
+                {stars(review.rating)}
+              </div>
+            )}
+            <div class="card-text">
+              <h2>{book.title}</h2>
+              {review ? (
+                <>
+                  <h3>{headline(review)}</h3>
+                  <div class="review" set:html={review.content} />
+                </>
+              ) : (
+                <p class="no-review">(no review)</p>
+              )}
+            </div>
+          </li>
+        );
+      })
     }
   </ul>
 </BaseLayout>
@@ -68,6 +125,117 @@ for (let pageIndex = 0; pageIndex < numberOfPages; pageIndex++) {
       display: flex;
       justify-content: center;
       align-items: center;
+    }
+  }
+
+  .card-backdrop,
+  .card-stars,
+  .card-text {
+    display: none;
+  }
+
+  /* Without anchor positioning it stays a plain grid of covers. */
+  @supports (anchor-name: --a) {
+    li {
+      /* every li gets its own --cover, so the cards anchor to their own image */
+      anchor-scope: --cover;
+      /* the hovered li is above its neighbours, its cover above its own card */
+      position: relative;
+      z-index: 0;
+      /* stay on top until the fade-out is done */
+      transition: z-index 0s 0.2s;
+
+      img {
+        anchor-name: --cover;
+        position: relative;
+        z-index: 2;
+      }
+
+      &:hover,
+      &:focus-within {
+        z-index: 1;
+        transition-delay: 0s;
+
+        .card-backdrop,
+        .card-stars,
+        .card-text {
+          opacity: 1;
+          visibility: visible;
+        }
+      }
+    }
+
+    /* fixed: anchored to the viewport, so the flip happens when the card would leave the screen */
+    .card-backdrop,
+    .card-stars,
+    .card-text {
+      display: block;
+      position: fixed;
+      position-anchor: --cover;
+      /* the default (anchors-visible) hid cards of covers that were off-screen at page load (Chrome);
+         the card only shows while its cover is hovered, so the cover is visible anyway */
+      position-visibility: always;
+      opacity: 0;
+      visibility: hidden;
+      transition:
+        opacity 0.2s ease-out,
+        visibility 0.2s;
+    }
+
+    /* backdrop and text share the same outer edge, so they always flip together */
+    .card-backdrop {
+      top: calc(anchor(top) - var(--size-48));
+      bottom: calc(anchor(bottom) - var(--size-16));
+      left: calc(anchor(left) - var(--size-16));
+      width: calc(anchor-size(width) + var(--size-32) + 20rem);
+      position-try-fallbacks: flip-inline;
+      background-color: var(--surface0);
+      border-radius: var(--size-8);
+      box-shadow: 0 var(--size-4) var(--size-16) var(--crust);
+    }
+
+    /* explicit anchor() insets: position-area wasn't re-resolved after the covers loaded (Chrome) */
+    .card-stars {
+      bottom: calc(anchor(top) + var(--size-8));
+      left: anchor(left);
+      right: anchor(right);
+      text-align: center;
+      z-index: 2;
+      color: var(--yellow);
+      white-space: nowrap;
+    }
+
+    .card-text {
+      top: anchor(top);
+      bottom: anchor(bottom);
+      left: calc(anchor(right) + var(--size-16));
+      width: calc(20rem - var(--size-16));
+      position-try-fallbacks: flip-inline;
+      z-index: 2;
+      overflow: hidden;
+      /* long reviews fade out instead of being cut mid-line */
+      mask-image: linear-gradient(to bottom, black 80%, transparent);
+      font-size: var(--font-size-16);
+
+      h2,
+      h3 {
+        margin: 0 0 var(--size-8);
+        font-size: var(--font-size-20);
+      }
+
+      h3 {
+        font-size: var(--font-size-16);
+      }
+
+      .no-review {
+        margin: 0;
+        color: var(--overlay1);
+      }
+    }
+
+    /* no review → no stars, so no extra room above the cover */
+    li:not(:has(.card-stars)) .card-backdrop {
+      top: calc(anchor(top) - var(--size-16));
     }
   }
 </style>
