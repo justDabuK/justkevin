@@ -33,6 +33,7 @@ type Review = {
   descriptionHtml: string;
   pubDate: Date;
   link: string;
+  cover?: { url: string; name: string };
 };
 
 function decodeEntities(value: string): string {
@@ -71,19 +72,68 @@ try {
         review.descriptionHtml.trim() !== "None",
     )
     .sort((a, b) => a.pubDate.getTime() - b.pubDate.getTime());
+
+  // The RSS has no cover, but the review's ActivityPub JSON does (as its first attachment).
+  // "/review/123/s/slug" -> "/review/123.json"
+  await Promise.all(
+    reviews.map(async (review) => {
+      try {
+        const json = await (await fetch(`${review.link.replace(/\/s\/.*$/, "")}.json`)).json();
+        review.cover = json.attachment?.[0];
+      } catch (error) {
+        console.error(`[BookReviews] No cover for ${review.link}:`, error);
+      }
+    }),
+  );
 } catch (error) {
   // Don't fail the whole build if the feed is unreachable — just log and render nothing.
   console.error(`[BookReviews] Could not load feed ${feedUrl}:`, error);
 }
 ---
 
-{
-  reviews.map((review) => (
-    <article class="book-review">
-      <h3>
-        <a href={review.link}>{review.title}</a>
-      </h3>
-      <div set:html={review.descriptionHtml} />
-    </article>
-  ))
-}
+<div class="book-reviews">
+  {
+    reviews.map((review) => (
+      <article class="book-review">
+        {review.cover && <img src={review.cover.url} alt={review.cover.name} />}
+        <div>
+          <h3>
+            <a href={review.link}>{review.title}</a>
+          </h3>
+          <div set:html={review.descriptionHtml} />
+        </div>
+      </article>
+    ))
+  }
+</div>
+
+<style>
+  .book-reviews {
+    display: grid;
+    grid-template-columns: 120px 1fr;
+    gap: var(--size-32) var(--size-16);
+  }
+
+  /* each entry is one row of the outer grid, so all covers/texts share the same columns */
+  .book-review {
+    display: grid;
+    grid-column: 1 / -1;
+    grid-template-columns: subgrid;
+    align-items: start;
+
+    img {
+      width: 100%;
+      align-self: center;
+      height: auto;
+    }
+
+    h3 {
+      margin-top: 0;
+    }
+
+    /* no cover: text takes both columns */
+    > div:only-child {
+      grid-column: 1 / -1;
+    }
+  }
+</style>
