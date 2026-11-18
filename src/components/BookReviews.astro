@@ -78,7 +78,9 @@ try {
   await Promise.all(
     reviews.map(async (review) => {
       try {
-        const json = await (await fetch(`${review.link.replace(/\/s\/.*$/, "")}.json`)).json();
+        const json = await (
+          await fetch(`${review.link.replace(/\/s\/.*$/, "")}.json`)
+        ).json();
         review.cover = json.attachment?.[0];
       } catch (error) {
         console.error(`[BookReviews] No cover for ${review.link}:`, error);
@@ -134,6 +136,44 @@ try {
     /* no cover: text takes both columns */
     > div:only-child {
       grid-column: 1 / -1;
+    }
+  }
+
+  .book-reviews {
+    container-type: inline-size;
+  }
+
+  /* narrow: cover becomes a thumbnail next to the title, text goes full width below */
+  @container (width < 30rem) {
+    .book-review {
+      grid-template-columns: 64px 1fr;
+      grid-template-areas:
+        "cover title"
+        "text text";
+      column-gap: var(--size-12);
+
+      /* lets h3 and text be placed in the article's grid directly */
+      > div {
+        display: contents;
+      }
+
+      img {
+        grid-area: cover;
+      }
+
+      h3 {
+        grid-area: title;
+        margin-bottom: 0;
+        align-self: center;
+      }
+
+      > div > div {
+        grid-area: text;
+      }
+
+      > div:only-child > h3 {
+        grid-column: 1 / -1;
+      }
     }
   }
 </style>
