@@ -211,11 +211,11 @@ const canonical = new URL(Astro.url.pathname, Astro.site);
     color: var(--link-color);
     text-decoration: underline;
     text-decoration-color: transparent;
-    transition: all 0.2s ease-out;
+    transition: text-decoration-color 0.2s ease-out;
 
     &:hover {
       text-decoration-color: var(--link-color);
-      transition: all 0.2s ease-in;
+      transition: text-decoration-color 0.2s ease-in;
     }
   }
 

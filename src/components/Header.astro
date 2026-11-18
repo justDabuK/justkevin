@@ -3,70 +3,293 @@ import ThemeSelection from "./ThemeSelection/ThemeSelection.astro";
 import { Icon } from "astro-icon/components";
 ---
 
-<div>
-  <!-- TODO: do something when viewport is smaller than 500 or so-->
-  <nav>
-    <a href="/" class="home-button">
-      <Icon name="kevin_single_logo_large" />
-      home
-    </a>
-    <ul>
-      <li><a href="/portfolio">portfolio</a></li>
-      <li><a href="/cv">cv</a></li>
-      <li><a href="/blog">blog</a></li>
-      <li><a href="/books">books</a></li>
-    </ul>
-  </nav>
-  <ThemeSelection />
-  <a href="https://muenchen.social/@justkevin"><Icon name="mastodon" /></a>
-  <a href="https://wyrms.de/user/justkevin"><Icon name="bookwyrm" /></a>
-  <a href="https://github.com/justDabuK"><Icon name="github" /></a>
-  <a href="mailto:kevin.just+homepage@posteo.de"><Icon name="email" /></a>
-  <a href="https://www.linkedin.com/in/kevin-just-b1660712b/">
-    <Icon name="linkedin" />
+<header id="site-header">
+  <a href="/" class="home-button">
+    <Icon name="kevin_single_logo_large" />
+    <span class="home-label">home</span>
   </a>
-  <a href="/rss.xml"><Icon name="rss" /></a>
-</div>
+  <button class="menu-button" popovertarget="menu" aria-label="Open menu">
+    <Icon name="menu" />
+  </button>
+  <!-- wide screens: a plain part of the header; narrow screens: a fullscreen popover -->
+  <div id="menu" class="menu" popover>
+    <button
+      class="close-button"
+      popovertarget="menu"
+      popovertargetaction="hide"
+      aria-label="Close menu"
+    >
+      <Icon name="close" />
+    </button>
+    <nav>
+      <ul>
+        <li><a href="/portfolio">portfolio</a></li>
+        <li><a href="/cv">cv</a></li>
+        <li><a href="/blog">blog</a></li>
+        <li><a href="/books">books</a></li>
+      </ul>
+    </nav>
+    <div class="theme">
+      <ThemeSelection />
+    </div>
+    <div class="socials">
+      <a href="https://muenchen.social/@justkevin"><Icon name="mastodon" /></a>
+      <a href="https://wyrms.de/user/justkevin"><Icon name="bookwyrm" /></a>
+      <a href="https://github.com/justDabuK"><Icon name="github" /></a>
+      <a href="mailto:kevin.just+homepage@posteo.de"><Icon name="email" /></a>
+      <a href="https://www.linkedin.com/in/kevin-just-b1660712b/">
+        <Icon name="linkedin" />
+      </a>
+      <a href="/rss.xml"><Icon name="rss" /></a>
+    </div>
+  </div>
+</header>
+
+<!-- inline (not bundled) so it runs before the first paint: no flash of the overflowing row on phones -->
+<script is:inline>
+  {
+    // Collapse to logo + menu button exactly when the full row wouldn't fit.
+    const header = document.getElementById("site-header");
+    const home = header.querySelector(".home-button");
+    const logo = home.querySelector("[data-icon]");
+    const label = home.querySelector(".home-label");
+    const menu = document.getElementById("menu");
+
+    const update = () => {
+      if (menu.matches(":popover-open")) return;
+      const gap = parseFloat(getComputedStyle(header).columnGap);
+      const homeGap = parseFloat(getComputedStyle(home).columnGap);
+      // scrollWidth: the natural width, also while the label is visually hidden / the menu is measured off-screen
+      const needed =
+        logo.getBoundingClientRect().width +
+        homeGap +
+        label.scrollWidth +
+        gap +
+        menu.scrollWidth;
+      header.classList.toggle("collapsed", header.clientWidth < needed);
+    };
+
+    new ResizeObserver(update).observe(header);
+    menu.addEventListener("toggle", update);
+  }
+</script>
+
+<script>
+  // Open/close the menu as a circle growing from / shrinking into the button (View Transitions API).
+  // Without support or with reduced motion, the native popovertarget toggle just runs as before.
+  const menu = document.getElementById("menu")!;
+
+  document
+    .querySelectorAll<HTMLButtonElement>(".menu-button, .close-button")
+    .forEach((button) => {
+      button.addEventListener("click", (event) => {
+        if (
+          !document.startViewTransition ||
+          matchMedia("(prefers-reduced-motion: reduce)").matches
+        )
+          return;
+        event.preventDefault(); // cancels the popovertarget toggle, we do it inside the transition
+
+        const opening = !menu.matches(":popover-open");
+        const { left, top, width, height } = button.getBoundingClientRect();
+        const x = left + width / 2;
+        const y = top + height / 2;
+        // distance to the farthest corner, so the circle covers the whole screen
+        const radius = Math.hypot(
+          Math.max(x, innerWidth - x),
+          Math.max(y, innerHeight - y),
+        );
+
+        const root = document.documentElement;
+        root.classList.toggle("menu-closing", !opening);
+        const transition = document.startViewTransition(() =>
+          menu.togglePopover(opening),
+        );
+        transition.ready.then(() => {
+          const circle = [
+            `circle(0 at ${x}px ${y}px)`,
+            `circle(${radius}px at ${x}px ${y}px)`,
+          ];
+          const animation = root.animate(
+            { clipPath: opening ? circle : circle.reverse() },
+            {
+              duration: 400,
+              easing: "ease-in-out",
+              // keep the end state until the transition is torn down, otherwise closing flashes the open menu
+              fill: "forwards",
+              pseudoElement: opening
+                ? "::view-transition-new(root)"
+                : "::view-transition-old(root)",
+            },
+          );
+          // drop the filled end state, or it would stick to the next transition's snapshots
+          transition.finished.then(() => animation.cancel());
+        });
+        transition.finished.then(() => root.classList.remove("menu-closing"));
+      });
+    });
+</script>
+
+<style is:global>
+  /* replace the default cross-fade with the circle animation from the script above */
+  ::view-transition-old(root),
+  ::view-transition-new(root) {
+    animation: none;
+    mix-blend-mode: normal;
+  }
+
+  /* closing: the old snapshot (open menu) shrinks on top of the new one */
+  .menu-closing::view-transition-old(root) {
+    z-index: 1;
+  }
+</style>
 
 <style>
-  div {
+  header {
     display: flex;
     gap: var(--size-8);
     align-items: center;
-    justify-content: space-between;
     margin: var(--size-48) var(--size-32);
+  }
+
+  .home-button {
+    display: flex;
+    align-items: center;
+    gap: var(--size-8);
+
+    [data-icon] {
+      font-size: var(--size-96);
+      color: var(--text-color);
+    }
+  }
+
+  [data-icon] {
+    font-size: var(--font-size-30);
+    color: var(--text-color);
+    transition: color 0.2s ease-in-out;
+
+    &:hover {
+      color: var(--teal);
+    }
+  }
+
+  button {
+    display: flex;
+    padding: 0;
+    border: none;
+    background: none;
+    cursor: pointer;
+  }
+
+  ul {
+    list-style: none;
+    display: flex;
+    gap: var(--size-8);
+    margin: 0;
+    padding: 0;
+  }
+
+  .socials {
+    display: flex;
+    gap: var(--size-8);
+  }
+
+  /* Wide: undo the popover's UA styles so the menu is just part of the header row */
+  .menu {
+    display: flex;
+    flex: 1;
+    align-items: center;
+    gap: var(--size-8);
+    position: static;
+    inset: auto;
+    width: auto;
+    height: auto;
+    margin: 0;
+    padding: 0;
+    border: none;
+    overflow: visible;
+    background: none;
+    color: inherit;
 
     nav {
-      flex: 1;
-      display: flex;
-      justify-content: space-between;
-      align-items: center;
+      /* pushes the links to the right, next to the theme selection */
+      margin-left: auto;
+    }
+  }
 
-      [data-icon] {
-        font-size: var(--size-96);
-        color: var(--text-color);
+  .menu-button,
+  .close-button {
+    display: none;
+  }
+
+  /* Narrow (set by the script below when the row doesn't fit): logo + menu button */
+  header.collapsed {
+    justify-content: space-between;
+
+    .home-label {
+      /* visually hidden, still read by screen readers */
+      position: absolute;
+      width: 1px;
+      height: 1px;
+      overflow: hidden;
+      clip-path: inset(50%);
+      white-space: nowrap;
+    }
+
+    .menu-button {
+      display: flex;
+    }
+
+    /* still laid out (invisible, off the page flow) so the script can measure its natural width */
+    .menu:not(:popover-open) {
+      position: fixed;
+      width: max-content;
+      visibility: hidden;
+    }
+
+    .menu:popover-open {
+      position: fixed;
+      inset: 0;
+      width: 100%;
+      height: 100%;
+      flex-direction: column;
+      justify-content: center;
+      /* a layer on top of the page, same color as the book hover cards */
+      background-color: var(--surface0);
+      font-size: var(--font-size-30);
+
+      nav,
+      .theme,
+      .socials {
+        width: min(16rem, 100%);
+        display: flex;
+        justify-content: center;
+        margin: 0;
+        padding: var(--size-32) 0;
       }
 
-      .home-button {
-        display: flex;
-        align-items: center;
-        gap: var(--size-8);
+      /* horizontal dividers between the three sections instead of the theme selection's vertical ones */
+      .theme {
+        border-block: 2px solid color-mix(in oklch, CanvasText 30%, transparent);
+
+        > :global(div) {
+          border: none;
+          padding: 0;
+        }
       }
 
       ul {
-        list-style: none;
-        display: flex;
-        gap: var(--size-8);
+        flex-direction: column;
+        align-items: center;
+        gap: var(--size-16);
       }
-    }
 
-    [data-icon] {
-      font-size: var(--font-size-30);
-      color: var(--text-color);
-      transition: color 0.2s ease-in-out;
-
-      &:hover {
-        color: var(--teal);
+      .close-button {
+        display: flex;
+        position: absolute;
+        /* same spot as the menu button: vertically centered next to the logo */
+        top: calc(var(--size-48) + (var(--size-96) - var(--font-size-30)) / 2);
+        right: var(--size-32);
       }
     }
   }
