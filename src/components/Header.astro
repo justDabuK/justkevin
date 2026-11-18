@@ -75,74 +75,21 @@ import { Icon } from "astro-icon/components";
 </script>
 
 <script>
-  // Open/close the menu as a circle growing from / shrinking into the button (View Transitions API).
-  // Without support or with reduced motion, the native popovertarget toggle just runs as before.
+  import { circleTransition } from "../scripts/circleTransition";
+
+  // Open/close the menu as a circle growing from / shrinking into the button.
   const menu = document.getElementById("menu")!;
 
   document
     .querySelectorAll<HTMLButtonElement>(".menu-button, .close-button")
     .forEach((button) => {
       button.addEventListener("click", (event) => {
-        if (
-          !document.startViewTransition ||
-          matchMedia("(prefers-reduced-motion: reduce)").matches
-        )
-          return;
-        event.preventDefault(); // cancels the popovertarget toggle, we do it inside the transition
-
+        event.preventDefault(); // cancels the native popovertarget toggle, it happens inside the transition
         const opening = !menu.matches(":popover-open");
-        const { left, top, width, height } = button.getBoundingClientRect();
-        const x = left + width / 2;
-        const y = top + height / 2;
-        // distance to the farthest corner, so the circle covers the whole screen
-        const radius = Math.hypot(
-          Math.max(x, innerWidth - x),
-          Math.max(y, innerHeight - y),
-        );
-
-        const root = document.documentElement;
-        root.classList.toggle("menu-closing", !opening);
-        const transition = document.startViewTransition(() =>
-          menu.togglePopover(opening),
-        );
-        transition.ready.then(() => {
-          const circle = [
-            `circle(0 at ${x}px ${y}px)`,
-            `circle(${radius}px at ${x}px ${y}px)`,
-          ];
-          const animation = root.animate(
-            { clipPath: opening ? circle : circle.reverse() },
-            {
-              duration: 400,
-              easing: "ease-in-out",
-              // keep the end state until the transition is torn down, otherwise closing flashes the open menu
-              fill: "forwards",
-              pseudoElement: opening
-                ? "::view-transition-new(root)"
-                : "::view-transition-old(root)",
-            },
-          );
-          // drop the filled end state, or it would stick to the next transition's snapshots
-          transition.finished.then(() => animation.cancel());
-        });
-        transition.finished.then(() => root.classList.remove("menu-closing"));
+        circleTransition(button, () => menu.togglePopover(opening), !opening);
       });
     });
 </script>
-
-<style is:global>
-  /* replace the default cross-fade with the circle animation from the script above */
-  ::view-transition-old(root),
-  ::view-transition-new(root) {
-    animation: none;
-    mix-blend-mode: normal;
-  }
-
-  /* closing: the old snapshot (open menu) shrinks on top of the new one */
-  .menu-closing::view-transition-old(root) {
-    z-index: 1;
-  }
-</style>
 
 <style>
   header {

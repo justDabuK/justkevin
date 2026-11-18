@@ -1,0 +1,11 @@
+/* Only while circleTransition() runs, so other view transitions keep their default cross-fade */
+.circle-transition::view-transition-old(root),
+.circle-transition::view-transition-new(root) {
+  animation: none;
+  mix-blend-mode: normal;
+}
+
+/* reverse: the old snapshot shrinks on top of the new one */
+.circle-transition-reverse::view-transition-old(root) {
+  z-index: 1;
+}
