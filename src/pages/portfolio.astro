@@ -1,11 +1,37 @@
 ---
-import BaseLayout from "../layouts/BaseLayout.astro";
+import BaseLayout from "@layouts/BaseLayout.astro";
+import Card from "@components/Card.astro";
+import CardGrid from "@components/CardGrid.astro";
+import { fetchPreview } from "../scripts/fetchPreview";
+
+// each project's own Open Graph tags provide its card's title, description and image
+const projects = await Promise.all(
+  [
+    {
+      url: "https://drakkenheim-beyond.vercel.app/",
+      name: "drakkenheim beyond",
+    },
+    { url: "https://spell-overview.vercel.app/", name: "spell-overview" },
+  ].map(async ({ url, name }) => ({ url, name, ...(await fetchPreview(url)) })),
+);
+const firstImage = projects.findIndex((project) => project.image);
 ---
 
 <BaseLayout title="portfolio">
-    <h1>Portfolio</h1>
-    <ul>
-        <li><a href="https://drakkenheim-beyond.vercel.app/">drakkenheim beyond</a></li>
-        <li><a href="https://spell-overview.vercel.app/">spell-overview</a></li>
-    </ul>
+  <h1>Portfolio</h1>
+  <CardGrid>
+    {
+      projects.map((project, i) => (
+        <Card
+          href={project.url}
+          title={project.title ?? project.name}
+          image={project.image}
+          description={project.description}
+          eager={i === firstImage}
+        >
+          {project.image && project.description}
+        </Card>
+      ))
+    }
+  </CardGrid>
 </BaseLayout>
