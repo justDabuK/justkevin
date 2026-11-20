@@ -1,26 +1,28 @@
 ---
-// Fetches book reviews from a StoryGraph/BookWyrm-style RSS feed at *build time*
+// Fetches book reviews from a BookWyrm ActivityPub outbox at *build time*
 // and renders the ones published within a [start, end] date range.
+// (The RSS feed only carries the latest ~10 reviews, the outbox has all of them.)
 //
-// Feed item shape:
-//   <title>Review of "Book" (N stars): Review headline</title>
-//   <description>HTML-encoded review body (or literally "None" when no text)</description>
-//   <pubDate>RFC-822 date</pubDate>
-//   <link>permalink to the review</link>
+// Outbox pages are newest first; reviews are items of type "Article":
+//   name: 'Review of "Book" (N stars): Review headline'
+//   content: HTML review body
+//   published: ISO date
+//   id: review URL (redirects to the permalink)
+//   attachment[0]: { url, name } of the book cover
 
 interface Props {
   /** Inclusive start of the range. Date or any string `new Date()` accepts (e.g. "2026-06-01"). */
   start: string | Date;
   /** Inclusive end of the range. A date-only string covers the whole day. */
   end: string | Date;
-  /** Override the feed URL if needed. */
-  feedUrl?: string;
+  /** Override the outbox URL if needed. */
+  outboxUrl?: string;
 }
 
 const {
   start,
   end,
-  feedUrl = "https://wyrms.de/user/justkevin/rss-reviews",
+  outboxUrl = "https://wyrms.de/user/justkevin/outbox?page=1",
 } = Astro.props;
 
 const startDate = new Date(start);
@@ -36,60 +38,55 @@ type Review = {
   cover?: { url: string; name: string };
 };
 
-function decodeEntities(value: string): string {
-  return value
-    .replace(/&lt;/g, "<")
-    .replace(/&gt;/g, ">")
-    .replace(/&quot;/g, '"')
-    .replace(/&#39;/g, "'")
-    .replace(/&amp;/g, "&"); // keep last so the others aren't re-decoded
-}
-
-function tag(block: string, name: string): string {
-  const match = block.match(new RegExp(`<${name}>([\\s\\S]*?)</${name}>`));
-  return match ? decodeEntities(match[1].trim()) : "";
-}
+type OutboxItem = {
+  type: string;
+  id: string;
+  name?: string;
+  content?: string;
+  published: string;
+  attachment?: { url: string; name: string }[];
+};
 
 let reviews: Review[] = [];
 
 try {
-  const response = await fetch(feedUrl);
-  if (!response.ok) throw new Error(`HTTP ${response.status}`);
-  const xml = await response.text();
+  let pageUrl: string | undefined = outboxUrl;
+  // walk pages until we're past the start of the range (or out of pages)
+  while (pageUrl) {
+    const response = await fetch(pageUrl, {
+      headers: { Accept: "application/activity+json" },
+    });
+    if (!response.ok) throw new Error(`HTTP ${response.status}`);
+    const page: { orderedItems?: OutboxItem[]; next?: string } =
+      await response.json();
+    const items = page.orderedItems ?? [];
 
-  reviews = (xml.match(/<item>[\s\S]*?<\/item>/g) ?? [])
-    .map((item) => ({
-      title: tag(item, "title"),
-      descriptionHtml: tag(item, "description"),
-      pubDate: new Date(tag(item, "pubDate")),
-      link: tag(item, "link"),
-    }))
-    .filter(
-      (review) =>
-        review.pubDate >= startDate &&
-        review.pubDate <= endDate &&
-        // Skip ratings with no written review.
-        review.descriptionHtml.trim() !== "None",
-    )
-    .sort((a, b) => a.pubDate.getTime() - b.pubDate.getTime());
-
-  // The RSS has no cover, but the review's ActivityPub JSON does (as its first attachment).
-  // "/review/123/s/slug" -> "/review/123.json"
-  await Promise.all(
-    reviews.map(async (review) => {
-      try {
-        const json = await (
-          await fetch(`${review.link.replace(/\/s\/.*$/, "")}.json`)
-        ).json();
-        review.cover = json.attachment?.[0];
-      } catch (error) {
-        console.error(`[BookReviews] No cover for ${review.link}:`, error);
+    for (const item of items) {
+      const pubDate = new Date(item.published);
+      if (
+        item.type === "Article" &&
+        item.content?.trim() &&
+        pubDate >= startDate &&
+        pubDate <= endDate
+      ) {
+        reviews.push({
+          title: item.name ?? "",
+          descriptionHtml: item.content,
+          pubDate,
+          link: item.id,
+          cover: item.attachment?.[0],
+        });
       }
-    }),
-  );
+    }
+
+    const oldest = items.at(-1);
+    pageUrl =
+      oldest && new Date(oldest.published) >= startDate ? page.next : undefined;
+  }
+  reviews.sort((a, b) => a.pubDate.getTime() - b.pubDate.getTime());
 } catch (error) {
-  // Don't fail the whole build if the feed is unreachable — just log and render nothing.
-  console.error(`[BookReviews] Could not load feed ${feedUrl}:`, error);
+  // Don't fail the whole build if the outbox is unreachable — just log and render nothing.
+  console.error(`[BookReviews] Could not load outbox ${outboxUrl}:`, error);
 }
 ---
 
